@@ -177,7 +177,7 @@ void CarMeterWidget::drawValue(QPainter *painter)
 
     font.setPixelSize(29);
     painter->setFont(font);
-    painter->drawText(251, 422, 285, 49, Qt::AlignCenter, tr("总里程：546546 km"));
+    painter->drawText(251, 422, 285, 49, Qt::AlignCenter, tr("ODO: 546546 km"));
     painter->restore();
 }
 

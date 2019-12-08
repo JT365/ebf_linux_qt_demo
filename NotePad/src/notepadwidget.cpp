@@ -86,7 +86,7 @@ void NotePadWidget::OpenDocument(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        m_textEdit->setText(tr("打开文件失败"));
+        m_textEdit->setText(tr("Open file failed"));
         return;
     }
 
@@ -102,7 +102,7 @@ void NotePadWidget::SaveDocument(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate)) {
-        QMessageBox::warning(this, tr("告警"), tr("保存文件失败！！！"));
+        QMessageBox::warning(this, tr("Warning"), tr("Save file failed!!!"));
         return;
     }
 
@@ -120,7 +120,7 @@ void NotePadWidget::InitWidget()
     m_widgetTitle->SetScalSize(Skin::m_nScreenWidth, 48);
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
-    m_widgetTitle->SetTitle(tr("记事本"), "#333333", 20);
+    m_widgetTitle->SetTitle(tr("Notepad"), "#333333", 20);
     m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/notepad/menu_icon.png"), QPixmap(":/images/notepad/menu_icon_pressed.png"));
 
     QtPixmapButton *btnMenu = new QtPixmapButton(1, QRect(10, 2, 40, 40), QPixmap(":/images/notepad/ic_file.png"), QPixmap(":/images/notepad/ic_file.png"));
@@ -132,22 +132,22 @@ void NotePadWidget::InitWidget()
     connect(m_widgetTitle, SIGNAL(signalBtnClicked(int)), this, SLOT(SltToolBtnClicked(int)));
 
     m_menuFile = new QMenu(this);
-    QAction *actionNew = new QAction(tr("新建"), this);
+    QAction *actionNew = new QAction(tr("New"), this);
     actionNew->setShortcut(QKeySequence(QKeySequence::New));
     m_menuFile->addAction(actionNew);
     connect(actionNew, SIGNAL(triggered(bool)), this, SLOT(NewDocument()));
 
-    QAction *actionOpen = new QAction(tr("打开"), this);
+    QAction *actionOpen = new QAction(tr("Open"), this);
     actionOpen->setShortcut(QKeySequence(QKeySequence::Open));
     connect(actionOpen, SIGNAL(triggered(bool)), this, SLOT(ActionOpen()));
     m_menuFile->addAction(actionOpen);
 
-    QAction *actionSave = new QAction(tr("保存"), this);
+    QAction *actionSave = new QAction(tr("Save"), this);
     actionSave->setShortcut(QKeySequence(QKeySequence::Save));
     connect(actionSave, SIGNAL(triggered(bool)), this, SLOT(SaveDocument()));
     m_menuFile->addAction(actionSave);
 
-    QAction *actionExit = new QAction(tr("退出"), this);
+    QAction *actionExit = new QAction(tr("Quit"), this);
     actionExit->setShortcut(QKeySequence(QKeySequence::Close));
     m_menuFile->addAction(actionExit);
     connect(actionExit, SIGNAL(triggered(bool)), this, SIGNAL(signalBackHome()));

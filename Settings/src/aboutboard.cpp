@@ -49,32 +49,49 @@ AboutBoard::~AboutBoard()
 void AboutBoard::InitBoardInfo()
 {
 #ifdef __arm__
-    // emmc设备检测
-    if (QFile::exists(FLASH_FILE_EMMC)) {
-        m_strNandSize = "";
-        return;
-    }
 
     // nand容量读取
-    quint32 usize, i;
+    quint32 usize;
     QString flash_file;
-    for (i = 0; i < FLASH_FILE_PART; i++) {
-        flash_file = QString(FLASH_FILE_INFO).arg(i);
+        
+    // emmc设备检测
+    if (QFile::exists(FLASH_FILE_EMMC)) {
 
-        QFile file(flash_file);
+        QFile file(FLASH_FILE_EMMC);
         if (!file.open(QIODevice::ReadOnly)) {
-            qDebug() << "Read flash size failed";
+            qDebug() << "Read eMMC size failed";
             return;
         }
 
         QString strTemp = file.readAll();
         strTemp.remove("\\n");
-        usize += strTemp.toULong();
+        usize = strTemp.toULong();
         file.close();
+ 
+        usize /= (1024 * 1024);
+        m_strNandSize = QString("%1MB eMMC").arg(usize);            
     }
+    else {
+    	
+        quint32 i;
+        for (i = 0; i < FLASH_FILE_PART; i++) {
+            flash_file = QString(FLASH_FILE_INFO).arg(i);
 
-    usize /= (1024 * 1024);
-    m_strNandSize = QString("%1MB NAND").arg(usize);
+            QFile file(flash_file);
+            if (!file.open(QIODevice::ReadOnly)) {
+                qDebug() << "Read flash size failed";
+                return;
+            }
+
+            QString strTemp = file.readAll();
+            strTemp.remove("\\n");
+            usize += strTemp.toULong();
+            file.close();
+        }
+        
+        usize /= (1024 * 1024);
+        m_strNandSize = QString("%1MB NAND").arg(usize);
+    }
 
 #endif
 }
@@ -82,18 +99,18 @@ void AboutBoard::InitBoardInfo()
 void AboutBoard::InitWidget()
 {
     int index = 0;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("硬件版本"),  tr("V1.0"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("开发板型号"),  tr("EBF6UL/6ULL S1 Pro"), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Hardware version"),  tr("V1.0"), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Model"),  tr("Innostick 6"), QPixmap())); index++;
     m_strNandSize = m_strNandSize.isEmpty() ? tr("8GB eMMC") : m_strNandSize;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("存储空间"),  m_strNandSize, QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("内存大小"),  tr("512MB"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("关于App"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Storage space"),  m_strNandSize, QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Memory size"),  tr("512MB"), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("About App"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
 }
 
 void AboutBoard::SltCurrentIndexClicked(int index)
 {
     if (4 == index) {
-        emit signalChangePage(6);
+        emit signalChangePage(7);
     }
 }
 

@@ -19,6 +19,7 @@
 #include "datetimesettingpage.h"
 #include "versionupdatepage.h"
 #include "languagepage.h"
+#include "fontpage.h"
 
 #include <QBoxLayout>
 #include <QDebug>
@@ -26,8 +27,8 @@
 SettingWidget::SettingWidget(QWidget *parent) : QtAnimationWidget(parent)
 {
     this->SetBackground(QPixmap(":/images/setting/ic_background.png"));
-    m_strListTitle = QStringList() << tr("系统设置") << tr("关于开发板") << tr("亮度调节")
-                                   << tr("设置时间") << tr("设置日期") << tr("语言设置") << tr("检查更新");
+    m_strListTitle = QStringList() << tr("System") << tr("About") << tr("Backlight")
+                                   << tr("Time") << tr("Date") << tr("Font") << tr("Language") << tr("Version");
     InitWidget();
     InitSettingPage();
 }
@@ -58,7 +59,7 @@ void SettingWidget::InitWidget()
     m_stackedWidget->setPressMove(false);
     m_stackedWidget->SetBackground(Qt::transparent);
 
-    connect(m_stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SltCurrentPageChanged(int)));
+//    connect(m_stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SltCurrentPageChanged(int)));
 
     // 全局布局
     QVBoxLayout *verLayoutAll = new QVBoxLayout(this);
@@ -94,13 +95,17 @@ void SettingWidget::InitSettingPage()
     connect(dateSetting, SIGNAL(signalFinished()), this, SLOT(SltBtnBackClicked()));
     m_stackedWidget->addWidget(4, dateSetting);
 
+    // Font
+    FontPage *fontWidget = new FontPage(m_stackedWidget);
+    m_stackedWidget->addWidget(5, fontWidget);
+    
     // 语言管理
     LanguagePage *languageWidget = new LanguagePage(m_stackedWidget);
-    m_stackedWidget->addWidget(5, languageWidget);
+    m_stackedWidget->addWidget(6, languageWidget);
 
     // 检查更新
     VersionUpdatePage *checkVersion = new VersionUpdatePage(m_stackedWidget);
-    m_stackedWidget->addWidget(6, checkVersion);
+    m_stackedWidget->addWidget(7, checkVersion);
 }
 
 void SettingWidget::SltToolBtnClicked(int /*index*/)
@@ -119,6 +124,7 @@ void SettingWidget::SltBtnBackClicked()
 
     m_btnBack->setVisible(0 != index);
     m_stackedWidget->setCurrentIndex(index, QtStackedWidget::RightDirection);
+    SltCurrentPageChanged(index);
 }
 
 void SettingWidget::SltCurrentPageChanged(int index)
@@ -127,7 +133,7 @@ void SettingWidget::SltCurrentPageChanged(int index)
         m_widgetTitle->SetTitle(m_strListTitle.at(index));
     }
     else {
-        m_widgetTitle->SetTitle(tr("系统设置"));
+        m_widgetTitle->SetTitle(tr("System"));
     }
 
     m_widgetTitle->SetBtnVisible(index == 0);
@@ -138,4 +144,5 @@ void SettingWidget::SltChangePage(int index)
     m_btnBack->setVisible(0 != index);
     m_pageStack.append(m_stackedWidget->currentIndex());
     m_stackedWidget->setCurrentIndex(index, QtStackedWidget::LeftDirection);
+    SltCurrentPageChanged(index);
 }

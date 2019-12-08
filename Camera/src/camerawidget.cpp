@@ -67,7 +67,7 @@ CameraWidget::~CameraWidget()
 
 void CameraWidget::TakePhotos()
 {
-    m_strInfoMsg = QString("照相失败！");
+    m_strInfoMsg = QString(tr("Take photo failure!"));
     if (NULL != m_camera) {
         QString strFileName = m_strPhotoPath + "Img_";
         strFileName += QDateTime::currentDateTime().toString("yyyyMMddhhmss");
@@ -205,7 +205,7 @@ void CameraWidget::paintEvent(QPaintEvent *)
         QFont font = painter.font();
         font.setPixelSize(28);
         painter.setFont(font);
-        painter.drawText(QRect(0, 0, m_nBaseWidth, m_nBaseHeight), Qt::AlignCenter, tr("照相机打开失败！"));
+        painter.drawText(QRect(0, 0, m_nBaseWidth, m_nBaseHeight), Qt::AlignCenter, tr("Open Camera failure!"));
     }
 #endif
 

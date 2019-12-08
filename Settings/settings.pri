@@ -14,6 +14,7 @@ HEADERS += \
     $$PWD/src/versionupdatepage.h \
     $$PWD/src/downloadnetworkmanager.h \
     $$PWD/src/languagepage.h \
+    $$PWD/src/fontpage.h \    
     $$PWD/qtmessagebox.h
 
 SOURCES += \
@@ -26,4 +27,5 @@ SOURCES += \
     $$PWD/src/versionupdatepage.cpp \
     $$PWD/src/downloadnetworkmanager.cpp \
     $$PWD/src/languagepage.cpp \
+    $$PWD/src/fontpage.cpp \
     $$PWD/qtmessagebox.cpp

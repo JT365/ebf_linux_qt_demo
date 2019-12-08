@@ -15,25 +15,12 @@
 #include "appconfig.h"
 
 #include "musicplayer.h"
-#include "beepwidget.h"
-#include "rgblightmonitor.h"
-#include "backlightwidget.h"
-#include "calendarwidget.h"
-#include "calculator.h"
 #include "camerawidget.h"
 #include "carmeterwidget.h"
-#include "adcviewer.h"
 #include "dhtcollection.h"
-#include "ebookwidget.h"
 #include "filesystemwindow.h"
-#include "gyroscope.h"
 #include "notepadwidget.h"
-#include "photosview.h"
-#include "recorderwidget.h"
 #include "settingwidget.h"
-#include "videoplayer.h"
-#include "weatherwidget.h"
-#include "keypresswidget.h"
 #include "infoneswidget.h"
 
 #ifdef BUILD_WIN_NES
@@ -74,6 +61,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     InitDesktop();
     InitThreads();
 
+    m_mainTimer = new QTimer(this);
+    connect(m_mainTimer, SIGNAL(timeout()), this, SLOT(slotTimeoutMainTimer()));  
+
+    /* Start timer */
+    m_mainTimer->start(1000);   // 1ms
+          
 #ifdef CHECK_MOUSE_BY_TIMER
     m_nMouseCheckId = startTimer(3000);
 #endif
@@ -88,6 +81,11 @@ MainWindow::~MainWindow()
     delete m_aboutUs;
     m_aboutUs = NULL;
 
+    delete m_mainTimer;
+    m_mainTimer = NULL;    
+
+    delete displayTime;
+    
     if (NULL != m_widgetWorkSpace) {
         delete m_widgetWorkSpace;
         m_widgetWorkSpace = NULL;
@@ -95,20 +93,34 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::InitWidget() {
+    QFont font(Skin::m_strAppFontBold);
+    
     QVBoxLayout *verLayout = new QVBoxLayout(this);
     verLayout->setContentsMargins(0, 0, 0, 0);
     verLayout->setSpacing(0);
 
     m_launcherWidget = new LauncherWidget(this);
     m_launcherWidget->SetWallpaper(QPixmap(":/images/mainwindow/background.png"));
+    m_launcherWidget->setFont(QFont(Skin::m_strAppFontNormal));
     connect(m_launcherWidget, SIGNAL(currentItemClicked(int)), this, SLOT(SltCurrentAppChanged(int)));
     verLayout->addWidget(m_launcherWidget, 1);
 
-    // 广告
+    // Advertisement
     m_aboutUs = new AboutUs(this);
     m_aboutUs->hide();
-    connect(m_launcherWidget, SIGNAL(signalAboutClicked()), m_aboutUs, SLOT(SltStartMove()));
+//    connect(m_launcherWidget, SIGNAL(signalAboutClicked()), m_aboutUs, SLOT(SltStartMove()));
 
+    /* Time */
+    QTime currentTime = QTime::currentTime();
+    displayTime = new QLabel(this);
+    displayTime->setGeometry((float)710/800*this->geometry().width(), (float)395/480*this->geometry().height(),
+                             (float)280/800*this->geometry().width(), (float)100/480*this->geometry().height());
+    displayTime->setStyleSheet("QLabel { color: white;background: transparent}");
+    displayTime->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    displayTime->setText(currentTime.toString().mid(0, 8));
+    font.setPointSize((float)22/800*this->geometry().width());
+    displayTime->setFont(font);
+    
 #if 0
     if (NULL == m_musicWidget) {
         m_musicWidget = new MusicPlayer(this);
@@ -120,48 +132,31 @@ void MainWindow::InitWidget() {
 
 void MainWindow::InitDesktop()
 {
-    bool bMiniBoard = AppConfig::ReadSetting("System", "mini", false).toBool();
 #if 1
     // 第一页
     int nPage = 0;
-    m_launchItems.insert(0, new LauncherItem(0, nPage, tr("文件管理"), QPixmap(":/images/mainwindow/ic_file.png")));
-    m_launchItems.insert(3, new LauncherItem(3, nPage, tr("相册"), QPixmap(":/images/mainwindow/ic_photos.png")));
-    m_launchItems.insert(5, new LauncherItem(5, nPage, tr("天气"), QPixmap(":/images/mainwindow/ic_weather.png")));
-    m_launchItems.insert(6, new LauncherItem(6, nPage, tr("记事本"), QPixmap(":/images/mainwindow/ic_notepad.png")));
-    m_launchItems.insert(7, new LauncherItem(7, nPage, tr("时钟"), QPixmap(":/images/mainwindow/ic_clock.png")));
-    m_launchItems.insert(8, new LauncherItem(8, nPage, tr("电子书"), QPixmap(":/images/mainwindow/ic_ebook.png")));
-    m_launchItems.insert(10, new LauncherItem(10, nPage, tr("计算器"), QPixmap(":/images/mainwindow/ic_calc.png")));
+    m_launchItems.insert(0, new LauncherItem(0, nPage, tr("File Manage"), QPixmap(":/images/mainwindow/ic_file.png")));
+    m_launchItems.insert(6, new LauncherItem(6, nPage, tr("Notepad"), QPixmap(":/images/mainwindow/ic_notepad.png")));
 
-    // mini板卡取消功能
-    if (!bMiniBoard) {
-        m_launchItems.insert(1, new LauncherItem(1, nPage, tr("视频播放"), QPixmap(":/images/mainwindow/ic_video.png")));
-        m_launchItems.insert(2, new LauncherItem(2, nPage, tr("ADC"), QPixmap(":/images/mainwindow/ic_adc.png")));
-        m_launchItems.insert(4, new LauncherItem(4, nPage, tr("相机"), QPixmap(":/images/mainwindow/ic_camera.png")));
-        m_launchItems.insert(9, new LauncherItem(9, nPage, tr("温湿度"), QPixmap(":/images/mainwindow/ic_temp.png")));
-        m_launchItems.insert(11, new LauncherItem(11, nPage, tr("音乐播放"), QPixmap(":/images/mainwindow/ic_music.png")));
-    }
+    m_launchItems.insert(4, new LauncherItem(4, nPage, tr("Camera"), QPixmap(":/images/mainwindow/ic_camera.png")));
+    m_launchItems.insert(9, new LauncherItem(9, nPage, tr("DHT11"), QPixmap(":/images/mainwindow/ic_temp.png")));
+    m_launchItems.insert(11, new LauncherItem(11, nPage, tr("Music"), QPixmap(":/images/mainwindow/ic_music.png")));
 
+#ifdef BUILD_WITH_WEBVIEW
+    m_launchItems.insert(14, new LauncherItem(14, nPage, tr("Webengine"), QPixmap(":/images/mainwindow/ic_webview.png")));
+#endif
+    m_launchItems.insert(15, new LauncherItem(15, nPage, tr("Dashboard"), QPixmap(":/images/mainwindow/ic_car.png")));
+    m_launchItems.insert(23, new LauncherItem(23, nPage, tr("System"), QPixmap(":/images/mainwindow/ic_setting.png")));
+ 
+    m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES Simulator"), QPixmap(":/images/mainwindow/ic_game.png")));
+        
     // 第二页
     nPage++;
-    m_launchItems.insert(12, new LauncherItem(12, nPage, tr("RGB彩灯"), QPixmap(":/images/mainwindow/ic_light.png")));
-#ifdef BUILD_WITH_WEBVIEW
-    m_launchItems.insert(14, new LauncherItem(14, nPage, tr("网络浏览器"), QPixmap(":/images/mainwindow/ic_webview.png")));
-#endif
-    m_launchItems.insert(15, new LauncherItem(15, nPage, tr("汽车仪表"), QPixmap(":/images/mainwindow/ic_car.png")));
-    m_launchItems.insert(16, new LauncherItem(16, nPage, tr("背光调节"), QPixmap(":/images/mainwindow/ic_backlight.png")));
-    m_launchItems.insert(19, new LauncherItem(19, nPage, tr("按键测试"), QPixmap(":/images/mainwindow/ic_key.png")));
-    m_launchItems.insert(23, new LauncherItem(23, nPage, tr("系统设置"), QPixmap(":/images/mainwindow/ic_setting.png")));
 
-    // mini板卡取消功能
-    if (!bMiniBoard) {
-        m_launchItems.insert(13, new LauncherItem(13, nPage, tr("陀螺仪"), QPixmap(":/images/mainwindow/ic_gyroscope.png")));
-        m_launchItems.insert(17, new LauncherItem(17, nPage, tr("蜂鸣器"), QPixmap(":/images/mainwindow/ic_beep.png")));
-        m_launchItems.insert(18, new LauncherItem(18, nPage, tr("录音"), QPixmap(":/images/mainwindow/ic_record.png")));
-    }
 
     // 第三页
     nPage++;
-    m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES模拟器"), QPixmap(":/images/mainwindow/ic_game.png")));
+
 
     m_launcherWidget->SetItems(m_launchItems);
 #endif
@@ -180,6 +175,16 @@ void MainWindow::InitThreads()
 
     m_threadPowerKey->start();
     m_threadKey->start();
+}
+
+/* Update date and time zone */
+void MainWindow::slotTimeoutMainTimer(void) {
+    QTime currentTime = QTime::currentTime();
+    QString time = currentTime.toString().mid(0, 8);
+
+    /* 设置时间 */
+    displayTime->setText(time);
+
 }
 
 void MainWindow::SltCurrentAppChanged(int index)
@@ -201,54 +206,21 @@ void MainWindow::SltCurrentAppChanged(int index)
     }
 
     switch (index) {
+ 
     case 0: {
         m_widgetWorkSpace = new FileSystemWindow(this);
-    }
-        break;
-    case 1: {
-        if (NULL != m_musicWidget) {
-            m_musicWidget->StopMusic();
-        }
-        //
-        m_widgetWorkSpace = new VideoPlayer(this);
-    }
-        break;
-    case 2: {
-        m_widgetWorkSpace = new AdcViewer(this);
-    }
-        break;
-    case 3: {
-        m_widgetWorkSpace = new PhotosView(this);
-    }
-        break;
-    case 4: {
-        m_widgetWorkSpace = new CameraWidget(this);
-    }
-        break;
-    case 5: {
-        m_widgetWorkSpace = new WeatherWidget(this);
     }
         break;
     case 6: {
         m_widgetWorkSpace = new NotePadWidget(this);
     }
         break;
-    case 7: {
-        m_widgetWorkSpace = new CalendarWidget(this);
-    }
-        break;
-    case 8: {
-        m_widgetWorkSpace = new EBookWidget(this);
-    }
-        break;
+
     case 9: {
         m_widgetWorkSpace = new DhtCollection(this);
     }
         break;
-    case 10: {
-        m_widgetWorkSpace = new Calculator(this);
-    }
-        break;
+
     case 11: {
         //        m_widgetWorkSpace = new MusicPlayer(this);
         m_nCurrentIndex = index;
@@ -264,14 +236,7 @@ void MainWindow::SltCurrentAppChanged(int index)
         return;
     }
         break;
-    case 12: {
-        m_widgetWorkSpace = new RgbLightMonitor(this);
-    }
-        break;
-    case 13: {
-        m_widgetWorkSpace = new Gyroscope(this);
-    }
-        break;
+
     case 14: {
 #ifdef BUILD_WITH_WEBVIEW
         m_widgetWorkSpace = new BrowserWindow(this);
@@ -282,24 +247,7 @@ void MainWindow::SltCurrentAppChanged(int index)
         m_widgetWorkSpace = new CarMeterWidget(this);
     }
         break;
-    case 16: {
-        m_widgetWorkSpace = new BackLightWidget(this);
-    }
-        break;
-    case 17: {
-        m_widgetWorkSpace = new BeepWidget(this);
-    }
-        break;
-    case 18: {
-        m_widgetWorkSpace = new RecorderWidget(this);
-    }
-        break;
-    case 19: {
-        m_widgetWorkSpace = new KeyPressWidget(this);
-        connect(m_threadPowerKey, SIGNAL(signalKeyPressed(quint8)), (KeyPressWidget *)m_widgetWorkSpace, SLOT(SltKeyPressed(quint8)));
-        connect(m_threadKey, SIGNAL(signalKeyPressed(quint8)), (KeyPressWidget *)m_widgetWorkSpace, SLOT(SltKeyPressed(quint8)));
-    }
-        break;
+
     case 23: {
         m_widgetWorkSpace = new SettingWidget(this);
         connect((SettingWidget *)m_widgetWorkSpace, SIGNAL(signalChangeCursorShape(Qt::CursorShape)),

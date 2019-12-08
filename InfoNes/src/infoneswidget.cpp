@@ -35,7 +35,7 @@ void InfoNesWidget::InitWidget()
     m_widgetTitle->SetScalSize(Skin::m_nScreenWidth, 82);
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
-    m_widgetTitle->SetTitle(tr("InfoNes 模拟器"), QColor("#ffffff"), 32);
+    m_widgetTitle->SetTitle(tr("InfoNes Simulator"), QColor("#ffffff"), 32);
     connect(m_widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     InfoNesListWidget *infoListWidget = new InfoNesListWidget(this);

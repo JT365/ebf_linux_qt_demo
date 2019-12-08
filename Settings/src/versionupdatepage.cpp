@@ -32,7 +32,7 @@ VersionUpdatePage::VersionUpdatePage(QWidget *parent) : QWidget(parent)
     connect(m_download, SIGNAL(signalDownFinish(QString)), this, SLOT(SltDownloadOk(QString)));
 
     m_textBrowserInfo = new QtTextBroswer(this);
-    m_textBrowserInfo->setText(tr("当前版本： V%1 build at %2 %3 .").arg(APP_STR_VERSION).arg(APP_BUILD_DATE).arg(__TIME__));
+    m_textBrowserInfo->setText(tr("Current version: V%1 build at %2 %3 .").arg(APP_STR_VERSION).arg(APP_BUILD_DATE).arg(__TIME__));
 
     QHBoxLayout *horLayoutBtn = new QHBoxLayout();
     horLayoutBtn->setContentsMargins(0, 0, 0, 0);
@@ -44,11 +44,11 @@ VersionUpdatePage::VersionUpdatePage(QWidget *parent) : QWidget(parent)
     horLayoutBtn->addStretch();
 
     m_btnCheckVersion = new QPushButton(this);
-    m_btnCheckVersion->setText(tr("检查更新"));
+    m_btnCheckVersion->setText(tr("Check update"));
     horLayoutBtn->addWidget(m_btnCheckVersion);
 
     m_btnDownload = new QPushButton(this);
-    m_btnDownload->setText(tr("下载该版本"));
+    m_btnDownload->setText(tr("Upgrade"));
     m_btnDownload->setEnabled(false);
     horLayoutBtn->addWidget(m_btnDownload);
 
@@ -141,7 +141,7 @@ void VersionUpdatePage::SltDownloadProgress(qint64 bytesReceived, qint64 bytesTo
 {
     m_progressBar->setValue(bytesReceived);
     m_progressBar->setMaximum(bytesTotal);
-    m_labelUpdateLogo->setText(QString("已下载 %1 MB,总大小 %2 MB。")
+    m_labelUpdateLogo->setText(QString("Downloaded %1 MB, Totally %2 MB.")
                                .arg(bytesReceived * 1.0 / (1024 * 1024), 0, 'f', 2, QChar('0'))
                                .arg(bytesTotal * 1.0 / (1024 * 1024), 0, 'f', 2, QChar('0')));
 }
@@ -173,7 +173,7 @@ void VersionUpdatePage::SltDownloadOk(const QString &name)
     }
     else if (!QString::compare("tar.bz2", fileInfo.completeSuffix()))
     {
-        m_labelUpdateLogo->setText(tr("正在解压升级包，请勿断电或重启设备..."));
+        m_labelUpdateLogo->setText(tr("Updating, don't interrupt..."));
 #ifdef __arm__
         QProcess cmd;
         cmd.start("tar", QStringList() << "-jxvf" << name << "-C" << qApp->applicationDirPath());
@@ -198,12 +198,12 @@ void VersionUpdatePage::SltVersionInfo(const QString &verNum, const QString &ver
     if (!bError && CheckNewVersion(APP_STR_VERSION, verNum))
     {
         m_btnDownload->setEnabled(true);
-        QString strText = QString("发现新版本[ %1 ] \n\n").arg(verNum);
+        QString strText = QString("New version available [ %1 ] \n\n").arg(verNum);
         m_textBrowserInfo->setText(strText + verInfo);
     }
     else {
-        m_textBrowserInfo->setText(bError ? tr("版本更新发生异常...") :
-                                             tr("恭喜你！当前为最新版本，不用更新。"));
+        m_textBrowserInfo->setText(bError ? tr("Update failed...") :
+                                             tr("Already Latest version"));
         if (!bError) {
             m_textBrowserInfo->append(verInfo);
         }

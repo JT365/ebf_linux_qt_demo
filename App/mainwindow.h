@@ -12,6 +12,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include <QLabel>
 
 #include "launcherwidget.h"
 #include "qtwidgetbase.h"
@@ -28,7 +29,10 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    
+public slots:
+	void slotTimeoutMainTimer(void);                    // update date & time
+	
 private:
     LauncherWidget      *m_launcherWidget;
     QMap<int, LauncherItem*> m_launchItems;
@@ -43,7 +47,10 @@ private:
     ThreadMouseCheck    *m_threadUsbInsert;
     ThreadKey           *m_threadPowerKey;
     ThreadKey           *m_threadKey;
+    QTimer              *m_mainTimer;
 
+    QLabel *displayTime;           //  display time
+    
 #ifdef CHECK_MOUSE_BY_TIMER
     int              m_nMouseCheckId;
 #endif

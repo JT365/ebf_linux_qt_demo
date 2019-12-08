@@ -60,7 +60,7 @@ void MusicPlayer::InitWidget()
     widgetTitle->SetScalSize(Skin::m_nScreenWidth, 60);
     widgetTitle->SetBackground(Qt::transparent);
     widgetTitle->setFont(QFont(Skin::m_strAppFontNormal));
-    widgetTitle->SetTitle(tr("音乐播放器"), "#ffffff", 24);
+    widgetTitle->SetTitle(tr("Music"), "#ffffff", 24);
     connect(widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     QHBoxLayout *horLayoutCentor = new QHBoxLayout();

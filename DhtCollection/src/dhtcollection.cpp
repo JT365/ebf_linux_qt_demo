@@ -59,7 +59,7 @@ void DhtCollection::InitWidget()
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/backlight/menu_icon.png"), QPixmap(":/images/backlight/menu_icon_pressed.png"));
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
-    m_widgetTitle->SetTitle(tr("温湿度采集"), "#ffffff", 32);
+    m_widgetTitle->SetTitle(tr("DHT11"), "#ffffff", 32);
     connect(m_widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     m_stackedWidget = new QtStackedWidget(this);

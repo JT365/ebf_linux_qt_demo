@@ -59,6 +59,11 @@ int main(int argc, char *argv[])
     // 设置配置文件路径
     AppConfig::m_strSettingsFile = a.applicationDirPath() + "/conf/config.ini";
 
+    Skin::m_strAppFontNormal = AppConfig::ReadSetting("System", "FontNormal", "Arial Unicode MS").toString();
+    Skin::m_strAppFontRegular = AppConfig::ReadSetting("System", "FontRegular", "Arial Unicode MS").toString();
+    Skin::m_strAppFontBold = AppConfig::ReadSetting("System", "FontBold", "Arial Unicode MS").toString();
+    Skin::m_strAppFontMedium = AppConfig::ReadSetting("System", "FontMedium", "Arial Unicode MS").toString();
+
     // 安装翻译文件
     QString strTemp = qApp->applicationDirPath() + "/translations/";
     strTemp += AppConfig::ReadSetting("System", "language", "qt_zh.qm").toString();
@@ -75,7 +80,7 @@ int main(int argc, char *argv[])
     splash->Start();
 #else
     MainWindow w;
-    w.setWindowTitle(QStringLiteral("野火 @ Linux Qt Demo"));
+    w.setWindowTitle(QStringLiteral("WildFire Qt Demo"));
     // 主要是控制HDMI输出，如果是LCD显示，此行无关紧要
     w.resize(AppConfig::GetDesktopSize());
 

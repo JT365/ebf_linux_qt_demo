@@ -119,10 +119,10 @@ CameraConfig::CameraConfig(QWidget *parent) : QtAnimationWidget(parent)
 {
     this->SetBackground(Qt::transparent);
     m_photoSize = QSize(800, 480);
-    m_strListResolv = QStringList() << "320x240" << "480x272" << tr("800x480(默认)");
-    m_strListLight = QStringList() << tr("自动(默认)") << tr("光照") << tr("阴天") << tr("办公室") << tr("室内");
-    m_strListEffect = QStringList() << tr("正常(默认)") << tr("冷色") << tr("暖色")
-                                    << tr("黑白") << tr("泛黄") << tr("偏绿") << tr("过曝");
+    m_strListResolv = QStringList() << "320x240" << "480x272" << tr("800x480(Default)");
+    m_strListLight = QStringList() << tr("Auto(Default)") << tr("Daylight") << tr("Cloudy") << tr("Office") << tr("Indoor");
+    m_strListEffect = QStringList() << tr("Normal(Default)") << tr("Cold") << tr("Warm")
+                                    << tr("B&W") << tr("Yellowish") << tr("Greenish") << tr("Over-exposure");
     InitWidget();
     InitMainPage();
 }
@@ -143,7 +143,7 @@ void CameraConfig::InitWidget()
     m_widgetTitle->SetBackground(QColor("#000000"));
     m_widgetTitle->SetScalSize(400, 45);
     m_widgetTitle->setFont(Skin::m_strAppFontBold);
-    m_widgetTitle->SetTitle(tr("参数设置"), "#ffffff", 24);
+    m_widgetTitle->SetTitle(tr("Parameter Settings"), "#ffffff", 24);
 
     m_btnBack = new QPushButton(m_widgetTitle);
     connect(m_btnBack, SIGNAL(clicked(bool)), this, SLOT(SltBackClicked()));
@@ -202,7 +202,7 @@ void CameraConfig::InitMainPage()
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
         horLayout->setContentsMargins(10, 0, 10, 0);
-        horLayout->addWidget(new QLabel(tr("自动对焦"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Autofocus"), m_configMain));
         verLayoutAll->addLayout(horLayout);
 
         QtSwitchButton *switchBtn = new QtSwitchButton(m_configMain);
@@ -214,7 +214,7 @@ void CameraConfig::InitMainPage()
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
         horLayout->setContentsMargins(10, 0, 0, 0);
-        horLayout->addWidget(new QLabel(tr("亮度"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Brightness"), m_configMain));
         verLayoutAll->addLayout(horLayout);
 
         QtSliderBar *sliderLight = new QtSliderBar(m_configMain);
@@ -231,7 +231,7 @@ void CameraConfig::InitMainPage()
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
         horLayout->setContentsMargins(10, 0, 0, 0);
-        horLayout->addWidget(new QLabel(tr("饱和度"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Saturation"), m_configMain));
         verLayoutAll->addLayout(horLayout);
 
         QtSliderBar *sliderSaturation = new QtSliderBar(m_configMain);
@@ -248,7 +248,7 @@ void CameraConfig::InitMainPage()
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
         horLayout->setContentsMargins(10, 0, 0, 0);
-        horLayout->addWidget(new QLabel(tr("对比对"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Contrast"), m_configMain));
         verLayoutAll->addLayout(horLayout);
 
         QtSliderBar *sliderContrastratio = new QtSliderBar(m_configMain);
@@ -264,7 +264,7 @@ void CameraConfig::InitMainPage()
 
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
-        horLayout->addWidget(new QLabel(tr("分辨率"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Resolutions"), m_configMain));
         horLayout->setContentsMargins(10, 0, 10, 0);
         horLayout->setSpacing(0);
         verLayoutAll->addLayout(horLayout);
@@ -284,7 +284,7 @@ void CameraConfig::InitMainPage()
 
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
-        horLayout->addWidget(new QLabel(tr("光线模式"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Ambient"), m_configMain));
         horLayout->setContentsMargins(10, 0, 10, 0);
         horLayout->setSpacing(0);
         verLayoutAll->addLayout(horLayout);
@@ -304,7 +304,7 @@ void CameraConfig::InitMainPage()
 
     {
         QHBoxLayout *horLayout = new QHBoxLayout();
-        horLayout->addWidget(new QLabel(tr("特殊效果"), m_configMain));
+        horLayout->addWidget(new QLabel(tr("Effective"), m_configMain));
         horLayout->setContentsMargins(10, 0, 10, 0);
         horLayout->setSpacing(0);
         verLayoutAll->addLayout(horLayout);

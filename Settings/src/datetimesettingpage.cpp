@@ -94,7 +94,7 @@ void DateTimeSettingPage::paintEvent(QPaintEvent *)
     font.setPixelSize(30);
     painter.setFont(font);
     painter.setPen(QColor("#ffffff"));
-    painter.drawText(m_btnOk->rect(), Qt::AlignCenter, tr("确定"));
+    painter.drawText(m_btnOk->rect(), Qt::AlignCenter, tr("OK"));
 }
 
 void DateTimeSettingPage::mousePressEvent(QMouseEvent *e)

@@ -44,7 +44,7 @@ void DisplayRecordData::InitWidget()
     btnGroup->addButton(btnTemp, 0);
     btnTemp->setCheckable(true);
     btnTemp->setChecked(true);
-    btnTemp->setText(tr("温度"));
+    btnTemp->setText(tr("Temp."));
     btnTemp->setFixedSize(60, 60);
     verLayoutBtns->addWidget(btnTemp);
     verLayoutBtns->addStretch();
@@ -52,7 +52,7 @@ void DisplayRecordData::InitWidget()
     QPushButton  *btnHumidity = new QPushButton(widgetBtn);
     btnGroup->addButton(btnHumidity, 1);
     btnHumidity->setCheckable(true);
-    btnHumidity->setText(tr("湿度"));
+    btnHumidity->setText(tr("Hum."));
     btnHumidity->setFixedSize(60, 60);
     verLayoutBtns->addWidget(btnHumidity);
     connect(btnGroup, SIGNAL(buttonClicked(int)), this, SLOT(SltChangePage(int)));
@@ -69,7 +69,7 @@ void DisplayRecordData::InitWidget()
 
     m_customPlotHumidity = new QtCustomPlot(m_stackedWidget);
     m_customPlotHumidity->setBackgroundColor(Qt::transparent);
-    m_customPlotHumidity->setLabels(tr("时间/S"), tr("湿度/%"));
+    m_customPlotHumidity->setLabels(tr("Time/S"), tr("H/%"));
     m_customPlotHumidity->StartTest();
 
     m_stackedWidget->addWidget(0, m_customPlotTemp);

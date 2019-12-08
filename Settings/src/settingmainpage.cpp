@@ -59,12 +59,13 @@ void SettingMainPage::InitWidget()
     connect(m_btnSwitch, SIGNAL(buttonChecked(bool)), this, SLOT(SltSwitchClicked(bool)));
 
     int index = 1;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("关于开发板"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("显示/隐藏鼠标"),  tr(""), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("背光调节"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("时间设置"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("日期设置"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("语言设置(重启生效)"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("About"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Show/hide cursor"),  tr(""), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Backlight"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Time"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Date"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Font(Restart & take effect)"),  tr(""), QPixmap(":/images/setting/ic_next.png"))); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Language(Restart & take effect)"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
 }
 
 void SettingMainPage::SltCurrentIndexClicked(int index)

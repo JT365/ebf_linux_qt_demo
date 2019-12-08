@@ -42,7 +42,7 @@ void DisplayRealData::paintEvent(QPaintEvent *)
     QFont font(Skin::m_strAppFontBold);
     font.setPixelSize(24);
     painter.setFont(font);
-    painter.drawText(QRect(202, 240, 127, 66), tr("插入DHT11\n采集温湿度"), option);
+    painter.drawText(QRect(202, 240, 127, 66), tr("Insert DHT11\n"), option);
 
     // 绘制温湿度
     drawValues(&painter);

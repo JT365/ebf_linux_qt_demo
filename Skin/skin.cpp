@@ -12,10 +12,10 @@
 #include <QDebug>
 
 
-QString Skin::m_strAppFontNormal = "思源黑体 CN Normal";
-QString Skin::m_strAppFontRegular = "思源黑体 CN Regular";
-QString Skin::m_strAppFontBold = "思源黑体 CN Bold";
-QString Skin::m_strAppFontMedium = "思源黑体 CN Medium";
+QString Skin::m_strAppFontNormal = "Arial Unicode MS Normal";
+QString Skin::m_strAppFontRegular = "Arial Unicode MS Regular";
+QString Skin::m_strAppFontBold = "Arial Unicode MS Bold";
+QString Skin::m_strAppFontMedium = "Arial Unicode MS Medium";
 
 int     Skin::m_nScreenWidth = 800;
 int     Skin::m_nScreenHeight = 480;
