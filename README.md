@@ -2,11 +2,11 @@
 
 ## ReadMe
 
-1. This is Qt5 code, not compatible with QT4 version.
+1. This code is written in Qt5, and not compatible with QT4.
 2. The build environment is qt5.6.2 or above.
-3. Under Windows, the compiler is MinGW, no Visual Studio compiler supported.
+3. For Windows development environment, the compiler used is MinGW, no Visual Studio compiler supported.
 4. Fileapp.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
-5. App is the executable program of demo, that is, the program runs on ARM board.
+5. App is the executable program of this demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
 ## Install SDK
@@ -27,7 +27,7 @@ Accept all default settings, SDK will be installed under /opt/fsl-imx-x11/4.1.15
 source /opt/fsl-imx-x11/4.1.15-2.1.0/environment-setup-cortexa7hf-neon-poky-linux-gnueabi 
 ```
 
-Input:
+Type:
 ```bash
 qmake -v 
 ```
@@ -46,7 +46,7 @@ Using Qt version 5.6.2 in /opt/fsl-imx-x11/4.1.15-2.1.0/sysroots/cortexa7hf-neon
 
 **clone**
 ```bash
-git clone https://github.com/Embdefire/ebf_linux_qt_demo.git
+git clone -b wildfire_v1.0_ga https://github.com/JT365/ebf_linux_qt_demo.git
 ```
 ## Build
 
