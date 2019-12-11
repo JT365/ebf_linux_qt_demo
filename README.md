@@ -2,14 +2,14 @@
 
 ## ReadMe
 
-1. This C++ software is Qt5 code, which is not specially compatible with QT4 version.
-2. The build environment of this program is qt5.6.2 or above.
-3. Under Windows platform, the compiler is MinGW and does not support Visual Studio compiler.
+1. This is Qt5 code, not compatible with QT4 version.
+2. The build environment is qt5.6.2 or above.
+3. Under Windows, the compiler is MinGW, no Visual Studio compiler supported.
 4. Fileapp.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
-5. App is the executable program of demo, that is, the app program run on ARM board.
+5. App is the executable program of demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
-## How to build
+## Install SDK
 
 **Download SDK**
 
