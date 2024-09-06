@@ -1,7 +1,7 @@
 #-------------------------------------------------
 #
 # Project created by QtCreator 2019-08-27T16:03:48
-# Qt5-demo 综合代码
+# WildFire Qt5.12 Demo
 #
 #-------------------------------------------------
 
@@ -39,26 +39,16 @@ HEADERS += \
 include($$PWD/common/common.pri)
 include($$PWD/ui/ui.pri)
 
-include($$PWD/../AdcViewer/adcviewer.pri)
 include($$PWD/../BackLight/backlight.pri)
-include($$PWD/../Beep/beep.pri)
 include($$PWD/../Calendar/calendar.pri)
 include($$PWD/../Calculator/calculator.pri)
-include($$PWD/../Camera/camera.pri)
-include($$PWD/../CarMeter/carmeter.pri)
-include($$PWD/../DhtCollection/dht.pri)
 include($$PWD/../EBook/ebook.pri)
-include($$PWD/../FileSystem/filesystem.pri)
-include($$PWD/../Gyroscope/gyroscope.pri)
-include($$PWD/../KeyPressTest/keypress.pri)
 include($$PWD/../MusicPlayer/musicplayer.pri)
-include($$PWD/../NotePad/notepad.pri)
+
 include($$PWD/../Photos/photos.pri)
 #include($$PWD/../Recorder/recorder.pri)
-include($$PWD/../RgbLight/rgblight.pri)
 include($$PWD/../Settings/settings.pri)
 include($$PWD/../VideoPlayer/videoplayer.pri)
-include($$PWD/../Weather/weather.pri)
 #
 include($$PWD/../InfoNes/infones.pri)
 #include($$PWD/../NesSimulator/simulator.pri)
@@ -94,7 +84,7 @@ win32 {
 
 
 #编译HDMI版本，方便适配大屏显示
-DEFINES      += BUILD_WITH_HDMI
+#DEFINES      += BUILD_WITH_HDMI
 
 
 TRANSLATIONS    = qt_zh.ts qt_en.ts

@@ -15,25 +15,14 @@
 #include "appconfig.h"
 
 #include "musicplayer.h"
-#include "beepwidget.h"
-#include "rgblightmonitor.h"
 #include "backlightwidget.h"
 #include "calendarwidget.h"
 #include "calculator.h"
-#include "camerawidget.h"
-#include "carmeterwidget.h"
-#include "adcviewer.h"
-#include "dhtcollection.h"
 #include "ebookwidget.h"
-#include "filesystemwindow.h"
-#include "gyroscope.h"
-#include "notepadwidget.h"
 #include "photosview.h"
 //#include "recorderwidget.h"
 #include "settingwidget.h"
 #include "videoplayer.h"
-#include "weatherwidget.h"
-#include "keypresswidget.h"
 #include "infoneswidget.h"
 
 #include "qtmessage.h"
@@ -126,10 +115,7 @@ void MainWindow::InitDesktop()
 #if 1
     // 第一页
     int nPage = 0;
-    m_launchItems.insert(0, new LauncherItem(0, nPage, tr("文件管理"), QPixmap(":/images/mainwindow/ic_file.png")));
     m_launchItems.insert(3, new LauncherItem(3, nPage, tr("相册"), QPixmap(":/images/mainwindow/ic_photos.png")));
-    m_launchItems.insert(5, new LauncherItem(5, nPage, tr("天气"), QPixmap(":/images/mainwindow/ic_weather.png")));
-    m_launchItems.insert(6, new LauncherItem(6, nPage, tr("记事本"), QPixmap(":/images/mainwindow/ic_notepad.png")));
     m_launchItems.insert(7, new LauncherItem(7, nPage, tr("时钟"), QPixmap(":/images/mainwindow/ic_clock.png")));
     m_launchItems.insert(8, new LauncherItem(8, nPage, tr("电子书"), QPixmap(":/images/mainwindow/ic_ebook.png")));
     m_launchItems.insert(10, new LauncherItem(10, nPage, tr("计算器"), QPixmap(":/images/mainwindow/ic_calc.png")));
@@ -137,29 +123,16 @@ void MainWindow::InitDesktop()
     // mini板卡取消功能
     if (!bMiniBoard) {
         m_launchItems.insert(1, new LauncherItem(1, nPage, tr("视频播放"), QPixmap(":/images/mainwindow/ic_video.png")));
-        m_launchItems.insert(2, new LauncherItem(2, nPage, tr("ADC"), QPixmap(":/images/mainwindow/ic_adc.png")));
-        m_launchItems.insert(4, new LauncherItem(4, nPage, tr("相机"), QPixmap(":/images/mainwindow/ic_camera.png")));
-        m_launchItems.insert(9, new LauncherItem(9, nPage, tr("温湿度"), QPixmap(":/images/mainwindow/ic_temp.png")));
         m_launchItems.insert(11, new LauncherItem(11, nPage, tr("音乐播放"), QPixmap(":/images/mainwindow/ic_music.png")));
     }
 
     // 第二页
     nPage++;
-    m_launchItems.insert(12, new LauncherItem(12, nPage, tr("RGB彩灯"), QPixmap(":/images/mainwindow/ic_light.png")));
 #ifdef BUILD_WITH_WEBVIEW
     m_launchItems.insert(14, new LauncherItem(14, nPage, tr("网络浏览器"), QPixmap(":/images/mainwindow/ic_webview.png")));
 #endif
-    m_launchItems.insert(15, new LauncherItem(15, nPage, tr("汽车仪表"), QPixmap(":/images/mainwindow/ic_car.png")));
     m_launchItems.insert(16, new LauncherItem(16, nPage, tr("背光调节"), QPixmap(":/images/mainwindow/ic_backlight.png")));
-    m_launchItems.insert(19, new LauncherItem(19, nPage, tr("按键测试"), QPixmap(":/images/mainwindow/ic_key.png")));
     m_launchItems.insert(23, new LauncherItem(23, nPage, tr("系统设置"), QPixmap(":/images/mainwindow/ic_setting.png")));
-
-    // mini板卡取消功能
-    if (!bMiniBoard) {
-        m_launchItems.insert(13, new LauncherItem(13, nPage, tr("陀螺仪"), QPixmap(":/images/mainwindow/ic_gyroscope.png")));
-        m_launchItems.insert(17, new LauncherItem(17, nPage, tr("蜂鸣器"), QPixmap(":/images/mainwindow/ic_beep.png")));
-//        m_launchItems.insert(18, new LauncherItem(18, nPage, tr("录音"), QPixmap(":/images/mainwindow/ic_record.png")));
-    }
 
     // 第三页
     nPage++;
@@ -204,10 +177,6 @@ void MainWindow::SltCurrentAppChanged(int index)
     }
 
     switch (index) {
-    case 0: {
-        m_widgetWorkSpace = new FileSystemWindow(this);
-    }
-        break;
     case 1: {
         if(CheckDevice("声卡"))
         {
@@ -218,26 +187,8 @@ void MainWindow::SltCurrentAppChanged(int index)
         }
     }
         break;
-    case 2: {
-        if(CheckDevice("ADC"))
-            m_widgetWorkSpace = new AdcViewer(this);
-    }
-        break;
     case 3: {
         m_widgetWorkSpace = new PhotosView(this);
-    }
-        break;
-    case 4: {
-        if(CheckDevice("摄像头"))
-            m_widgetWorkSpace = new CameraWidget(this);
-    }
-        break;
-    case 5: {
-        m_widgetWorkSpace = new WeatherWidget(this);
-    }
-        break;
-    case 6: {
-        m_widgetWorkSpace = new NotePadWidget(this);
     }
         break;
     case 7: {
@@ -246,11 +197,6 @@ void MainWindow::SltCurrentAppChanged(int index)
         break;
     case 8: {
         m_widgetWorkSpace = new EBookWidget(this);
-    }
-        break;
-    case 9: {
-        if(CheckDevice("DHT11")){
-            m_widgetWorkSpace = new DhtCollection(this);}
     }
         break;
     case 10: {
@@ -276,24 +222,10 @@ void MainWindow::SltCurrentAppChanged(int index)
 
     }
         break;
-    case 12: {
-        if(CheckDevice("RGB彩灯"))
-            m_widgetWorkSpace = new RgbLightMonitor(this);
-    }
-        break;
-    case 13: {
-        if(CheckDevice("陀螺仪"))
-            m_widgetWorkSpace = new Gyroscope(this);
-    }
-        break;
     case 14: {
 #ifdef BUILD_WITH_WEBVIEW
         m_widgetWorkSpace = new BrowserWindow(this);
 #endif
-    }
-        break;
-    case 15: {
-        m_widgetWorkSpace = new CarMeterWidget(this);
     }
         break;
     case 16: {
@@ -301,22 +233,8 @@ void MainWindow::SltCurrentAppChanged(int index)
             m_widgetWorkSpace = new BackLightWidget(this);
     }
         break;
-    case 17: {
-        if(CheckDevice("蜂鸣器"))
-            m_widgetWorkSpace = new BeepWidget(this);
-    }
-        break;
     case 18: {
 //        m_widgetWorkSpace = new RecorderWidget(this);
-    }
-        break;
-    case 19: {
-        if(CheckDevice("按键")){
-            m_widgetWorkSpace = new KeyPressWidget(this);
-            connect(m_threadPowerKey, SIGNAL(signalKeyPressed(quint8)), (KeyPressWidget *)m_widgetWorkSpace, SLOT(SltKeyPressed(quint8)));
-            connect(m_threadKey, SIGNAL(signalKeyPressed(quint8)), (KeyPressWidget *)m_widgetWorkSpace, SLOT(SltKeyPressed(quint8)));
-        }
-
     }
         break;
     case 23: {
@@ -482,22 +400,8 @@ bool MainWindow::CheckDevice(QString device)
         info.setFile(VOICE_DEV);
     if(device=="NES声卡")
         info.setFile(VOICE_DEV);
-    else if(device=="ADC")
-        info.setFile(ADC_DEV);
-    else if(device=="摄像头")
-        info.setFile(CAMERA_DEV);
-    else if(device=="DHT11")
-        info.setFile(DHT11_DEV);
-    else if(device=="RGB彩灯")
-        info.setFile(RGB_DEV);
-    else if(device=="陀螺仪")
-        info.setFile(CheckMPU6050Device());
     else if(device=="背光调节")
         info.setFile(BKLIGHT_DEV);
-    else if(device=="蜂鸣器")
-        info.setFile(BEEP_DEV);
-    else if(device=="按键")
-        info.setFile(RGB_DEV);
 
     if(!info.exists())
     {

@@ -27,5 +27,6 @@ Skin::Skin()
 
 void Skin::InitSkin()
 {
+    Q_INIT_RESOURCE(images);
     qDebug() << "Skin InitOk: build at " << __DATE__ << __TIME__;
 }
