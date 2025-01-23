@@ -1,25 +1,38 @@
-# embedfire qt app
+# Wildfire qt app
 
-## 野火debian-qt5-demo资料说明
+## ReadMe
 
-1. 本代码为Qt5代码，没特意做Qt4版本兼容。
-2. 本程序编译环境为qt5.11.3以上版本的。
-3. windows为mingw编译器，不支持vs编译器。
-4. Qt5-demo源码介绍，本程序是基于Qt5开发的，不支持Qt4直接编译。
-5. FileApp.pro为多工程目录，里面的QtUi为demo的自定义基础控件库。Skin为皮肤资源文件。这2个都是必须的，且比较重要。
-6. App为demo的综合程序，即为开发板看到的App程序。
-7. 其他注释的工程为单个的应用程序，可取消注释，单独编译。
+1. This code is written in Qt5, and not compatible with QT4.
+2. The build environment is qt5.11.3 or above.
+3. For Windows development environment, the compiler used is MinGW, no Visual Studio compiler supported.
+4. Fileapp.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
+5. App is the executable program of this demo, that is, the program runs on ARM board.
+6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
-## 编译使用
+## Install SDK
 
+**Download SDK**
 
+SDK Links：<https://url.cn/5Iv5apg>
 
-输入命令
+Install qt5 cross development SDK：
+```bash
+./fsl-imx-x11-glibc-x86_64-meta-toolchain-qt5-cortexa7hf-neon-toolchain-4.1.15-2.1.0.sh
+```
+
+Accept all default settings, SDK will be installed under /opt/fsl-imx-x11/4.1.15-2.1.0/ 
+
+**Note**：Source environment settings on every shell session 
+```bash
+source /opt/fsl-imx-x11/4.1.15-2.1.0/environment-setup-cortexa7hf-neon-poky-linux-gnueabi 
+```
+
+Type:
 ```bash
 qmake -v 
 ```
 
-若环境变量设置正确，则会出现以下信息
+You will get following messages:
 
 ```bash
 embedfire@dev1:~$ qmake -v
@@ -27,35 +40,33 @@ QMake version 3.0
 Using Qt version 5.6.2 in /opt/fsl-imx-x11/4.1.15-2.1.0/sysroots/cortexa7hf-neon-poky-linux-gnueabi/usr/lib
 ```
 
-> 以上是验证SDK安装是否成功！！
+> SDK installed successfully!
 
-## 下载qt源码
+## Get source code
 
 **clone**
 ```bash
-git clone https://github.com/Embdefire/ebf_debian_qt_demo.git
+git clone -b wildfire_v2.0_ga https://github.com/JT365/ebf_linux_qt_demo.git
 ```
-## 编译
+## Build
 
 ```bash
 ./build.sh
 ```
 
-如果`build.sh`不是可执行文件，可以使用以下命令添加可执行权限
+Add privileges if `build.sh` fails to excute
 
 ```bash
 chmod +x build.sh
 ```
 
-## 输出
+## Deliverables
 
-在当前目录下会创建一个`run_dir`目录，存在`App  libqui  libskin`文件，App是可以直接在开发板上运行的！
-与此同时，还会打包一个`fire-app-xxxx.tar.bz2`文件，大家可以拷贝到对应的目录下解压替换掉旧的`App`。
+A new 'app_bin' sub-directory will be created under current directory. There are 'App/libqui/libskin' files. App can run directly on the ARM board!
+Meanwhile, a 'fire-app-xxxx.tar.bz2' file will be packed. You can copy it to the corresponding directory to extract and replace the old 'App'.
 
-## 清除相关内容
+## Clean build folders
 
 ```bash
 make distclean
 ```
-
-
