@@ -1,10 +1,10 @@
-# Wildfire qt app
+# Elephant Qt App
 
 ## ReadMe
 
 1. This code is written in Qt5, and not compatible with QT4.
 2. The build environment is qt5.11.3 or above.
-3. For Windows development environment, the compiler used is MinGW, no Visual Studio compiler supported.
+3. For Windows development environment, the compiler is MinGW, no Visual Studio compiler supported.
 4. Fileapp.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
 5. App is the executable program of this demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
@@ -46,7 +46,7 @@ Using Qt version 5.6.2 in /opt/fsl-imx-x11/4.1.15-2.1.0/sysroots/cortexa7hf-neon
 
 **clone**
 ```bash
-git clone -b wildfire_v2.0_ga https://github.com/JT365/ebf_linux_qt_demo.git
+git clone -b elephant_v1.0 https://github.com/JT365/ebf_linux_qt_demo.git
 ```
 ## Build
 
