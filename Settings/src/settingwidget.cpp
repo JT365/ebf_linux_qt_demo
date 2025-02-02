@@ -26,8 +26,8 @@
 SettingWidget::SettingWidget(QWidget *parent) : QtAnimationWidget(parent)
 {
     this->SetBackground(QPixmap(":/images/setting/ic_background.png"));
-    m_strListTitle = QStringList() << tr("系统设置") << tr("关于开发板") << tr("亮度调节")
-                                   << tr("设置时间") << tr("设置日期") << tr("语言设置") << tr("检查更新");
+    m_strListTitle = QStringList() << tr("System Setting") << tr("About") << tr("BackLight")
+                                   << tr("Setup Time") << tr("Setup Date") << tr("Language") << tr("Check update");
     InitWidget();
     InitSettingPage();
 }
@@ -127,7 +127,7 @@ void SettingWidget::SltCurrentPageChanged(int index)
         m_widgetTitle->SetTitle(m_strListTitle.at(index));
     }
     else {
-        m_widgetTitle->SetTitle(tr("系统设置"));
+        m_widgetTitle->SetTitle(tr("System Setting"));
     }
 
     m_widgetTitle->SetBtnVisible(index == 0);

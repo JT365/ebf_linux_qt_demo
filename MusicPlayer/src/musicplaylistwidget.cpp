@@ -171,7 +171,7 @@ void MusicPlayListWidget::paintEvent(QPaintEvent *)
     QFont font(Skin::m_strAppFontBold);
     font.setPixelSize(24);
     painter.setPen(Qt::white);
-    painter.drawText(0, 0, m_nBaseWidth, 40, Qt::AlignCenter, tr("播放列表"));
+    painter.drawText(0, 0, m_nBaseWidth, 40, Qt::AlignCenter, tr("Playlist"));
 
     painter.setPen(QColor("#797979"));
     painter.drawLine(QPoint(0, 40), QPoint(m_nBaseWidth, 40));

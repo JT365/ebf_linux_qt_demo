@@ -75,6 +75,6 @@ void CalendarMainPage::paintEvent(QPaintEvent *)
     QtPixmapButton *btn = m_btns.value(2);
     if (NULL != btn) {
         painter.drawPixmap(btn->rect(), btn->pixmap());
-        painter.drawText(btn->rect(), Qt::AlignCenter, tr("设置"));
+        painter.drawText(btn->rect(), Qt::AlignCenter, tr("Setting"));
     }
 }

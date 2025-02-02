@@ -196,7 +196,7 @@ void QtMessageBox::paintEvent(QPaintEvent *)
         painter.setBrush(QColor("#eeeeee"));
         painter.drawRoundedRect(m_btnCalcelRect, 2, 2);
         painter.setPen("#333333");
-        painter.drawText(m_btnCalcelRect, Qt::AlignCenter, tr("取消"));
+        painter.drawText(m_btnCalcelRect, Qt::AlignCenter, tr("Cancel"));
     }
 
     // 确认按钮
@@ -204,7 +204,7 @@ void QtMessageBox::paintEvent(QPaintEvent *)
     painter.setBrush(QColor("#eeeeee"));
     painter.drawRoundedRect(m_btnOkRect, 2, 2);
     painter.setPen("#333333");
-    painter.drawText(m_btnOkRect, Qt::AlignCenter, tr("确定"));
+    painter.drawText(m_btnOkRect, Qt::AlignCenter, tr("Ok"));
 
 }
 

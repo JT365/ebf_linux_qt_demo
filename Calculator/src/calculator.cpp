@@ -225,7 +225,7 @@ void Calculator::paintEvent(QPaintEvent *)
     font.setPixelSize(22);
     painter.setFont(font);
     painter.setPen(QColor("#ffffff"));
-    painter.drawText(rectTitle, Qt::AlignCenter, tr("计算器"));
+    painter.drawText(rectTitle, Qt::AlignCenter, tr("Calculator"));
 
     painter.drawPixmap(m_rectHome, QPixmap(QString(":/images/music/menu_icon%1.png")
                                            .arg(m_bRectHomePressed ? "_pressed" : "")));

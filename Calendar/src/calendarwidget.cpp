@@ -32,9 +32,9 @@ CalendarWidget::CalendarWidget(QWidget *parent) : QtAnimationWidget(parent)
     this->SetBackground(QPixmap(":/images/calendar/ic_background.png"));
 
     m_nCurrentPage = 0;
-    m_strTitle = tr("时间&日历");
-    m_strListTitle = QStringList() << tr("时间&日历") << tr("日历") << tr("选择表盘")
-                                   << tr("时间格式") << tr("设置时间") << tr("设置日期");
+    m_strTitle = tr("Clock & Calendar");
+    m_strListTitle = QStringList() << tr("Clock & Calendar") << tr("Calendar") << tr("Clock dial")
+                                   << tr("Time format") << tr("Setup time") << tr("Setup date");
     InitWidget();
     CreateMainPage();
     CreateConfigPage();
@@ -117,7 +117,7 @@ void CalendarWidget::SltCurrentPageChanged(int index)
     m_nCurrentPage = index;
     m_btnHome->setVisible(0 == index);
     m_btnBack->setVisible(0 != index);
-    if (1 == index) m_strCurrDate = QDate::currentDate().toString(tr("yyyy年MM月dd日"));
+    if (1 == index) m_strCurrDate = QDate::currentDate().toString(tr("yyyy/MM/dd"));
     this->SetBackground(QPixmap(QString(":/images/calendar/%1.png").arg(1 == index ? "ic_background_none" : "ic_background")));
 }
 
@@ -145,7 +145,7 @@ void CalendarWidget::SltBtnSetting()
 
 void CalendarWidget::SltCurrentDateChanged(const QDate &date)
 {
-    m_strCurrDate = date.toString(tr("yyyy年MM月dd日"));
+    m_strCurrDate = date.toString(tr("yyyy/MM/dd"));
     this->update();
 }
 

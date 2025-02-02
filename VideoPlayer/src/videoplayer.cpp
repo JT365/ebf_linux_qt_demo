@@ -41,7 +41,7 @@ void VideoPlayer::InitWidget()
     m_widgetTitle->SetScalSize(Skin::m_nScreenWidth, 80);
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontNormal));
-    m_widgetTitle->SetTitle(tr("视频播放器"), "#ffffff", 32);
+    m_widgetTitle->SetTitle(tr("Video Player"), "#ffffff", 32);
     connect(m_widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     QVBoxLayout *verLayoutCentor = new QVBoxLayout(this);

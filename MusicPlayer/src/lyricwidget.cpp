@@ -27,7 +27,7 @@ LyricWidget::LyricWidget(QWidget *parent) : QtWidgetBase(parent)
     m_nBaseWidth = 400;
     m_nBaseHeight = 360;
 
-    m_strSongName = tr("加载中...");
+    m_strSongName = tr("Loading...");
     m_nCurrentIndex = 0;
 
     // 歌词处理
@@ -138,11 +138,11 @@ void LyricWidget::paintEvent(QPaintEvent *)
         painter.setPen("#ffffff");
         QRect rect(0, 60, m_nBaseWidth, m_nBaseHeight - 52);
         if (m_bError) {
-            painter.drawText(rect, Qt::AlignCenter, tr("音乐文件格式解析错误"));
+            painter.drawText(rect, Qt::AlignCenter, tr("Music file format parsing error"));
         } else {
             painter.drawText(rect, Qt::AlignCenter,
-                             m_bLyricLoad ? tr("正在加载歌曲...") :
-                                            tr("未找到歌词文件"));
+                             m_bLyricLoad ? tr("Loading songs...") :
+                                            tr("Lyrics file not found"));
         }
     }
     else {

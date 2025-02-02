@@ -32,7 +32,7 @@ VersionUpdatePage::VersionUpdatePage(QWidget *parent) : QWidget(parent)
     connect(m_download, SIGNAL(signalDownFinish(QString)), this, SLOT(SltDownloadOk(QString)));
 
     m_textBrowserInfo = new QtTextBroswer(this);
-    m_textBrowserInfo->setText(tr("当前版本： V%1 build at %2 %3 .").arg(APP_STR_VERSION).arg(APP_BUILD_DATE).arg(__TIME__));
+    m_textBrowserInfo->setText(tr("Version: V%1 build at %2 %3 .").arg(APP_STR_VERSION).arg(APP_BUILD_DATE).arg(__TIME__));
 
     QHBoxLayout *horLayoutBtn = new QHBoxLayout();
     horLayoutBtn->setContentsMargins(0, 0, 0, 0);

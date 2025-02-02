@@ -91,7 +91,7 @@ void EBookWidget::InitWidget()
     m_widgetTitle->SetBackground(QColor("#f0f0f0"));
     m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/ebook/menu_icon.png"), QPixmap(":/images/ebook/menu_icon_pressed.png"));
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
-    m_widgetTitle->SetTitle(tr("电子书"), "#333333", 22);
+    m_widgetTitle->SetTitle(tr("EBook"), "#333333", 22);
     connect(m_widgetTitle, SIGNAL(signalBtnClicked(int)), this, SLOT(SltToolBtnClicked(int)));
 
     m_btnBack = new QtPixmapButton(BtnBack, QRect(10, 10, 40, 40), QPixmap(":/images/ebook/ic_back.png"), QPixmap(":/images/ebook/ic_back.png"));
@@ -135,7 +135,7 @@ void EBookWidget::LoadFileToBrowser(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        m_textBrowser->setText(tr("打开文件失败"));
+        m_textBrowser->setText(tr("Open file failed"));
         return;
     }
 
@@ -161,7 +161,7 @@ void EBookWidget::ChangePage(int index)
 void EBookWidget::SltBtnBack()
 {
     ChangePage(0);
-    m_widgetTitle->SetTitle(tr("电子书"));
+    m_widgetTitle->SetTitle(tr("EBook"));
     if (m_paletteWidget->pos().x() < this->width()) {
         m_paletteWidget->setGeometry(this->width(), m_widgetTitle->geometry().bottom(), 436, 432);
     }
@@ -239,7 +239,7 @@ void EBookWidget::SltToolBtnClicked(int index)
         emit signalBackHome();
     } else if (BtnBack == index) {
         ChangePage(0);
-        m_widgetTitle->SetTitle(tr("电子书"));
+        m_widgetTitle->SetTitle(tr("EBook"));
         if (m_paletteWidget->pos().x() < this->width()) {
             m_paletteWidget->setGeometry(this->width(), m_widgetTitle->geometry().bottom(), 436, 432);
         }

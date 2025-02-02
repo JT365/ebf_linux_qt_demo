@@ -82,12 +82,12 @@ void AboutBoard::InitBoardInfo()
 void AboutBoard::InitWidget()
 {
     int index = 0;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("硬件版本"),  tr("V1.0"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("开发板型号"),  tr("EBF6UL/6ULL S1 Pro"), QPixmap())); index++;
-    m_strNandSize = m_strNandSize.isEmpty() ? tr("8GB eMMC") : m_strNandSize;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("存储空间"),  m_strNandSize, QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("内存大小"),  tr("512MB"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("关于App"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Hardware rev."),  tr("V1.0"), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Model"),  tr("ALLWINNER T113 S3"), QPixmap())); index++;
+    m_strNandSize = m_strNandSize.isEmpty() ? tr("32GB TF") : m_strNandSize;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Storage space"),  m_strNandSize, QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Memory size"),  tr("128MB"), QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("About"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
 }
 
 void AboutBoard::SltCurrentIndexClicked(int index)

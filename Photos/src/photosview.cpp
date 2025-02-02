@@ -38,7 +38,7 @@ void PhotosView::InitWidget()
     QtWidgetTitleBar *widgetTitle = new QtWidgetTitleBar(this);
     widgetTitle->SetScalSize(Skin::m_nScreenWidth, 60);
     widgetTitle->SetBackground(QColor("#f0f0f0"));
-    widgetTitle->SetTitle(tr("相册"), "#333333", 25);
+    widgetTitle->SetTitle(tr("Photos"), "#333333", 25);
     widgetTitle->SetBtnHomePixmap(QPixmap(":/images/photos/menu_icon.png"), QPixmap(":/images/photos/menu_icon_pressed.png"));
 
     connect(widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));

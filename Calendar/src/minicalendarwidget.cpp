@@ -42,13 +42,13 @@ QString MiniCalendarWidget::getCurrendDayOfWeek()
     int nWeek = date.dayOfWeek();
 
     QString strWeek = "";
-    if (1 == nWeek) strWeek = tr("星期一");
-    else if (2 == nWeek) strWeek = tr("星期二");
-    else if (3 == nWeek) strWeek = tr("星期三");
-    else if (4 == nWeek) strWeek = tr("星期四");
-    else if (5 == nWeek) strWeek = tr("星期五");
-    else if (6 == nWeek) strWeek = tr("星期六");
-    else if (7 == nWeek) strWeek = tr("星期日");
+    if (1 == nWeek) strWeek = tr("Monday");
+    else if (2 == nWeek) strWeek = tr("Tuesday");
+    else if (3 == nWeek) strWeek = tr("Wednesday");
+    else if (4 == nWeek) strWeek = tr("Thursday");
+    else if (5 == nWeek) strWeek = tr("Friday");
+    else if (6 == nWeek) strWeek = tr("Saturday");
+    else if (7 == nWeek) strWeek = tr("Sunday");
 
     return strWeek;
 }

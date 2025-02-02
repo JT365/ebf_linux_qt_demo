@@ -115,28 +115,28 @@ void MainWindow::InitDesktop()
 #if 1
     // 第一页
     int nPage = 0;
-    m_launchItems.insert(3, new LauncherItem(3, nPage, tr("相册"), QPixmap(":/images/mainwindow/ic_photos.png")));
-    m_launchItems.insert(7, new LauncherItem(7, nPage, tr("时钟"), QPixmap(":/images/mainwindow/ic_clock.png")));
-    m_launchItems.insert(8, new LauncherItem(8, nPage, tr("电子书"), QPixmap(":/images/mainwindow/ic_ebook.png")));
-    m_launchItems.insert(10, new LauncherItem(10, nPage, tr("计算器"), QPixmap(":/images/mainwindow/ic_calc.png")));
+    m_launchItems.insert(3, new LauncherItem(3, nPage, tr("Photos"), QPixmap(":/images/mainwindow/ic_photos.png")));
+    m_launchItems.insert(7, new LauncherItem(7, nPage, tr("Clock"), QPixmap(":/images/mainwindow/ic_clock.png")));
+    m_launchItems.insert(8, new LauncherItem(8, nPage, tr("EBook"), QPixmap(":/images/mainwindow/ic_ebook.png")));
+    m_launchItems.insert(10, new LauncherItem(10, nPage, tr("Calculator"), QPixmap(":/images/mainwindow/ic_calc.png")));
 
     // mini板卡取消功能
     if (!bMiniBoard) {
-        m_launchItems.insert(1, new LauncherItem(1, nPage, tr("视频播放"), QPixmap(":/images/mainwindow/ic_video.png")));
-        m_launchItems.insert(11, new LauncherItem(11, nPage, tr("音乐播放"), QPixmap(":/images/mainwindow/ic_music.png")));
+        m_launchItems.insert(1, new LauncherItem(1, nPage, tr("Videos"), QPixmap(":/images/mainwindow/ic_video.png")));
+        m_launchItems.insert(11, new LauncherItem(11, nPage, tr("Music"), QPixmap(":/images/mainwindow/ic_music.png")));
     }
 
     // 第二页
     nPage++;
 #ifdef BUILD_WITH_WEBVIEW
-    m_launchItems.insert(14, new LauncherItem(14, nPage, tr("网络浏览器"), QPixmap(":/images/mainwindow/ic_webview.png")));
+    m_launchItems.insert(14, new LauncherItem(14, nPage, tr("Webview"), QPixmap(":/images/mainwindow/ic_webview.png")));
 #endif
-    m_launchItems.insert(16, new LauncherItem(16, nPage, tr("背光调节"), QPixmap(":/images/mainwindow/ic_backlight.png")));
-    m_launchItems.insert(23, new LauncherItem(23, nPage, tr("系统设置"), QPixmap(":/images/mainwindow/ic_setting.png")));
+    m_launchItems.insert(16, new LauncherItem(16, nPage, tr("Backlight"), QPixmap(":/images/mainwindow/ic_backlight.png")));
+    m_launchItems.insert(23, new LauncherItem(23, nPage, tr("Settings"), QPixmap(":/images/mainwindow/ic_setting.png")));
 
     // 第三页
     nPage++;
-    m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES模拟器"), QPixmap(":/images/mainwindow/ic_game.png")));
+    m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES Simulator"), QPixmap(":/images/mainwindow/ic_game.png")));
 
     m_launcherWidget->SetItems(m_launchItems);
 #endif

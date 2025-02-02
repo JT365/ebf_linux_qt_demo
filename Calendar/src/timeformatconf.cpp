@@ -34,9 +34,9 @@ TimeFormatConf::TimeFormatConf(QWidget *parent) : QtWidgetBase(parent)
     m_btns.insert(0, new QtPixmapButton(0, QRect(68, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
     m_btns.insert(1, new QtPixmapButton(1, QRect(317, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
     m_btns.insert(2, new QtPixmapButton(2, QRect(565, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
-    m_btns.value(0)->setText(tr("上一步"));
-    m_btns.value(1)->setText(tr("确  定"));
-    m_btns.value(2)->setText(tr("下一步"));
+    m_btns.value(0)->setText(tr("Prev. step"));
+    m_btns.value(1)->setText(tr("Ok"));
+    m_btns.value(2)->setText(tr("Next step"));
 
     connect(this, SIGNAL(signalBtnClicked(int)), this, SLOT(SltBtnClicked(int)));
 }
@@ -87,7 +87,7 @@ void TimeFormatConf::paintEvent(QPaintEvent *)
     font.setPixelSize(24);
     painter.setFont(font);
     painter.drawText(m_rectCenter.left() + 20, m_rectCenter.top(), m_rectCenter.width(), m_rectCenter.height(),
-                     Qt::AlignVCenter, tr("使用24小时制"));
+                     Qt::AlignVCenter, tr("Use 24-hour format"));
 
     // 绘制底部确定按钮
     drawButton(&painter);

@@ -85,10 +85,10 @@ void GameWidgetPannel::paintEvent(QPaintEvent *)
     painter.fillRect(rect, Qt::black);
     painter.setPen(QColor("#aaaaaa"));
     if (m_bQuit) {
-        painter.drawText(rect, Qt::AlignCenter, tr("正在退出游戏...."));
+        painter.drawText(rect, Qt::AlignCenter, tr("Exiting game..."));
     }
     else {
-        painter.drawText(rect, Qt::AlignCenter, m_bEngineError ? tr("游戏引擎错误，请联系管理员！") : tr("正在启动...."));
+        painter.drawText(rect, Qt::AlignCenter, m_bEngineError ? tr("Game engine error, please contact the administrator!") : tr("Starting game..."));
     }
 }
 

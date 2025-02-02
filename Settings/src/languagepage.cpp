@@ -60,7 +60,7 @@ void LanguagePage::SltCurrentIndexClicked(QtListWidgetItem *item)
 {
     AppConfig::SaveSetting("System", "language", item->m_strText);
 #if 0
-    int nRet = QtMessageBox::ShowAskMessage(tr("语言设置重启生效，是否立即重启?"), tr("语言设置"));
+    int nRet = QtMessageBox::ShowAskMessage(tr("Language setting takes effect after restart. Do you want to restart now?"), tr("Language Setting"));
     if (nRet == QDialog::Accepted)
     {
 #ifdef __arm__

@@ -161,5 +161,5 @@ void MediaPlayListWidget::paintEvent(QPaintEvent *)
     QFont font(Skin::m_strAppFontBold);
     font.setPixelSize(24);
     painter.setFont(font);
-    painter.drawText(0, 0, m_nBaseWidth, 40, Qt::AlignCenter, tr("播放列表"));
+    painter.drawText(0, 0, m_nBaseWidth, 40, Qt::AlignCenter, tr("Playlist"));
 }
