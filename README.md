@@ -5,7 +5,7 @@
 1. This code is written in Qt5, and not compatible with QT4.
 2. The build environment is qt5.11.3 or above.
 3. For Windows development environment, the compiler is MinGW, no Visual Studio compiler supported.
-4. Fileapp.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
+4. Elephant.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
 5. App is the executable program of this demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
@@ -63,7 +63,7 @@ chmod +x build.sh
 ## Deliverables
 
 A new 'app_bin' sub-directory will be created under current directory. There are 'App/libqui/libskin' files. App can run directly on the ARM board!
-Meanwhile, a 'fire-app-xxxx.tar.bz2' file will be packed. You can copy it to the corresponding directory to extract and replace the old 'App'.
+Meanwhile, a 'elephant-xxxx.tar.bz2' file will be packed. You can copy it to the corresponding directory to extract and replace the old 'App'.
 
 ## Clean build folders
 
