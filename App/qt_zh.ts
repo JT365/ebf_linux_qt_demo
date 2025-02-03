@@ -53,7 +53,7 @@
     <name>BackLightWidget</name>
     <message>
         <location filename="../BackLight/src/backlightwidget.cpp" line="40"/>
-        <source>BackLight brightness adjustment</source>
+        <source>Brightness Adjustment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

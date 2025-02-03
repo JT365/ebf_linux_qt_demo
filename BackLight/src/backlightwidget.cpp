@@ -37,7 +37,7 @@ void BackLightWidget::InitWidget()
     widgetTitle->SetScalSize(Skin::m_nScreenWidth, 80);
     widgetTitle->SetBackground(Qt::transparent);
     widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
-    widgetTitle->SetTitle(tr("BackLight brightness adjustment"), "#ffffff", 24);
+    widgetTitle->SetTitle(tr("Brightness Adjustment"), "#ffffff", 24);
     widgetTitle->SetBtnHomePixmap(QPixmap(":/images/backlight/menu_icon.png"), QPixmap(":/images/backlight/menu_icon_pressed.png"));
     connect(widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
