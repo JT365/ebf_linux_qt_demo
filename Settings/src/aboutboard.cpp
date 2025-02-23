@@ -12,6 +12,7 @@
 #include "aboutboard.h"
 #include "unit.h"
 #include "skin.h"
+#include "HAL.h"
 #include "clickedwidget.h"
 
 #include <QLabel>
@@ -34,7 +35,12 @@ AboutBoard::AboutBoard(QWidget *parent) : QtListWidget(parent)
     m_nBaseWidth = Skin::m_nScreenWidth;
     m_nBaseHeight = 400;
 
-    m_strNandSize = "";
+    m_strModel = "BeadaPanel 7";
+    m_strPlatform = "NXP i.mx6ull";
+    m_strNandSize = "32GB TF";
+    m_strResolutions = "800x480";
+    m_strFirmwareRev = "V820";
+
     InitBoardInfo();
     InitWidget();
     connect(this, SIGNAL(currentIndexClicked(int)), this, SLOT(SltCurrentIndexClicked(int)));
@@ -49,50 +55,53 @@ AboutBoard::~AboutBoard()
 void AboutBoard::InitBoardInfo()
 {
 #ifdef __arm__
-    // emmc设备检测
-    if (QFile::exists(FLASH_FILE_EMMC)) {
-        m_strNandSize = "";
-        return;
+    quint16 rev;
+    quint8 plat, os;
+    quint32 usize;
+    qint32 px, py;
+
+    getHalVer(&rev, &plat, &os);
+    m_strFirmwareRev = QString("%1").arg(rev);
+
+    if (plat==4) {
+        m_strPlatform = "ALLWinner V3S";
+    }
+    else if (plat==5) {
+        m_strPlatform = "ALLWinner T113";
+    }
+    else if (plat==1) {
+        m_strPlatform = "NXP i.mx6ul";
+    }
+
+    if (os==16) {
+        m_strModel = "BeadaPanel 6S";
     }
 
     // nand容量读取
-    quint32 usize, i;
-    QString flash_file;
-    for (i = 0; i < FLASH_FILE_PART; i++) {
-        flash_file = QString(FLASH_FILE_INFO).arg(i);
+    usize = getStorageSize();
+    usize /= 1024;
+    m_strNandSize = QString("%1MB").arg(usize);
 
-        QFile file(flash_file);
-        if (!file.open(QIODevice::ReadOnly)) {
-            qDebug() << "Read flash size failed";
-            return;
-        }
-
-        QString strTemp = file.readAll();
-        strTemp.remove("\\n");
-        usize += strTemp.toULong();
-        file.close();
-    }
-
-    usize /= (1024 * 1024);
-    m_strNandSize = QString("%1MB NAND").arg(usize);
-
+    getFBResolution(&px, &py, NULL);
+    m_strResolutions = QString("%1x%2").arg(px).arg(py);
 #endif
 }
 
 void AboutBoard::InitWidget()
 {
     int index = 0;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("Hardware rev."),  tr("V1.0"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("Model"),  tr("ALLWINNER T113 S3"), QPixmap())); index++;
-    m_strNandSize = m_strNandSize.isEmpty() ? tr("32GB TF") : m_strNandSize;
+
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Model"),  m_strModel, QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Platform"),  m_strPlatform, QPixmap())); index++;
     m_listItems.insert(index, new QtListWidgetItem(index, tr("Storage space"),  m_strNandSize, QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("Memory size"),  tr("128MB"), QPixmap())); index++;
-    m_listItems.insert(index, new QtListWidgetItem(index, tr("About"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Resolutions"),  m_strResolutions, QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Libpld rev."),  m_strFirmwareRev, QPixmap())); index++;
+    m_listItems.insert(index, new QtListWidgetItem(index, tr("Update"),  tr(""), QPixmap(":/images/setting/ic_next.png")));
 }
 
 void AboutBoard::SltCurrentIndexClicked(int index)
 {
-    if (4 == index) {
+    if (5 == index) {
         emit signalChangePage(6);
     }
 }

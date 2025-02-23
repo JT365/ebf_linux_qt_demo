@@ -35,6 +35,10 @@ private slots:
 
 private:
     QString m_strNandSize;
+    QString m_strModel;
+    QString m_strPlatform;
+    QString m_strFirmwareRev;
+    QString m_strResolutions;
 
 protected:
     void drawItemInfo(QPainter *painter, QtListWidgetItem *item);

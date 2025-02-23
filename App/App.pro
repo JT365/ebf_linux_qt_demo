@@ -86,5 +86,11 @@ win32 {
 #编译HDMI版本，方便适配大屏显示
 #DEFINES      += BUILD_WITH_HDMI
 
-
 TRANSLATIONS    = qt_zh.ts qt_en.ts
+
+cross_compile{
+    LIBS += -L$$PWD/../thirdpart/libpld/lib/ -lpld -luapi
+}
+
+INCLUDEPATH += $$PWD/../thirdpart/libpld/include
+DEPENDPATH += $$PWD/../thirdpart/libpld/include

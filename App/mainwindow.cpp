@@ -12,6 +12,7 @@
 #include "statusbarwidget.h"
 #include "unit.h"
 #include "skin.h"
+#include "HAL.h"
 #include "appconfig.h"
 
 #include "musicplayer.h"
@@ -49,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 {
 #ifdef __arm__
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
+
+    initHal(NULL);
 
     // 启动检测鼠标是否接入系统
     AppConfig::m_bMouseInsert = CheckMouseInsert();
@@ -407,7 +410,7 @@ bool MainWindow::CheckDevice(QString device)
     {
         qDebug()<<"device not found";
         QtMessage *msg=new QtMessage(this);
-        msg->setMessage(QString("没有检测到%1，\r\n请确认板卡支持该功能或已接入该硬件").arg(device));
+        msg->setMessage(QString("Device %1 not found，\r\nplease check with your hardware").arg(device));
 
         if(msg->exec()==QDialog::Accepted)
         {

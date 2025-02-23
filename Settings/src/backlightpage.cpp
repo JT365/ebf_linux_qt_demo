@@ -11,6 +11,7 @@
 *******************************************************************/
 #include "backlightpage.h"
 #include "skin.h"
+#include "HAL.h"
 
 #include <QBoxLayout>
 #include <QTextStream>
@@ -43,20 +44,12 @@ void BackLightPage::InitWidget()
 void BackLightPage::ReadBacklight()
 {
 #ifdef __arm__
-    QString strFile = "/sys/class/backlight/backlight/brightness";
-    QFile file(strFile);
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "open Leds failed!";
-        m_nLevel = 5;
-        return;
-    }
+    unsigned char max, current;
 
-    QString strTemp = file.readAll();
-    m_nLevel = strTemp.toInt();
-    if (m_nLevel > 5 && m_nLevel < 100) {
-        m_knobSwitch->setValue(m_nLevel);
+    getBrightness(&max, &current);
+    if (current > 5 && current < 100) {
+        m_knobSwitch->setValue(current);
     }
-    file.close();
 #endif
 }
 
@@ -66,16 +59,7 @@ void BackLightPage::SltValueChanged(int value)
 
     m_nLevel = (value < 5 ? 5 : value);
 #ifdef __arm__
-    QString strFile = "/sys/class/backlight/backlight/brightness";
-    QFile file(strFile);
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
-        qDebug() << "open Leds failed!";
-        return;
-    }
-
-    QTextStream in(&file);
-    in << m_nLevel;
-    file.close();
+        setBrightness(m_nLevel);
 #endif
 }
 
