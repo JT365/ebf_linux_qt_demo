@@ -73,8 +73,8 @@ void AboutBoard::InitBoardInfo()
         m_strPlatform = "NXP i.mx6ul";
     }
 
-    if (os==16) {
-        m_strModel = "BeadaPanel 6S";
+    if (os==20) {
+        m_strModel = "BeadaPanel 5S";
     }
 
     // nand容量读取

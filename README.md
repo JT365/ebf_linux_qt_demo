@@ -2,10 +2,10 @@
 
 ## ReadMe
 
-1. This code is written in Qt5, and not compatible with QT4.
-2. The build environment is qt5.11.3 or above.
+1. The code is written in Qt5, and not compatible with QT4.
+2. Build environment should be qt5.11.3 or above.
 3. For Windows development environment, the compiler is MinGW, no Visual Studio compiler supported.
-4. Elephant.pro is a multi project directory, in which qtui is the custom basic control library of demo. Skin is a skin resource file. Both of them are necessary and important.
+4. Elephant.pro is a multi directory project, in which QtUi is the custom basic control library of demo. Skin is for skin resource files. Both of them are necessary and important.
 5. App is the executable program of this demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
