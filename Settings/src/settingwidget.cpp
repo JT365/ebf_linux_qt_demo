@@ -44,7 +44,6 @@ void SettingWidget::InitWidget()
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
     m_widgetTitle->SetTitle(m_strListTitle.at(0), QColor("#ffffff"), 32);
-    m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/setting/menu_icon.png"), QPixmap(":/images/setting/menu_icon_pressed.png"));
     connect(m_widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     m_btnBack = new QtPixmapButton(1, QRect(20, 20, 40, 40), QPixmap(":/images/calendar/ic_back.png"), QPixmap(":/images/calendar/ic_back_pressed.pn"));

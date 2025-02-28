@@ -16,6 +16,7 @@
 #include "qtvideowidget.h"
 #include "qtwidgetbase.h"
 #include "videolistviewer.h"
+#include "qtfiledialog.h"
 
 class VideoPlayer : public QtAnimationWidget
 {
@@ -25,9 +26,17 @@ public:
     VideoPlayer(QWidget *parent = 0);
     ~VideoPlayer();
 
+    typedef enum {BtnHome, BtnBack, BtnAdd, BtnSetting} ToolBtn;
+
 private:
+    QString             m_strDirPath;
+
     VideoListViewer     *m_videosList;
     QtVideoWidget       *m_videoWidget;
+    QtFileDialog        *m_dirDialog;
+    QtPixmapButton      *m_btnAdd;
+    QtPixmapButton      *m_btnBack;
+    QtPixmapButton      *m_btnSetting;
 
 private:
     void InitWidget();
@@ -35,6 +44,9 @@ private:
 private slots:
     void LoadMedias();
     void SltItemClicked(QtPageListWidgetItem *item);
+    void SltDirSelected(const QString &fileName);
+    void SltDirDialogClose();
+    void SltToolBtnClicked(int index);
 
 protected:
     void resizeEvent(QResizeEvent *e);

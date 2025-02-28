@@ -37,6 +37,7 @@ QtFileDialog::QtFileDialog(QWidget *parent) : QtAnimationWidget(parent)
     m_keyboard = NULL;
     m_strListFilter = QStringList() << "*.txt";
     m_strRootPath = qApp->applicationDirPath() + "/";
+
     InitWidget();
     InitModel();
 }
@@ -62,6 +63,14 @@ void QtFileDialog::setRootPath(const QString &path)
 bool QtFileDialog::isSaveFileMode()
 {
     return m_bSaveFile;
+}
+
+void QtFileDialog::setLineditVisible(bool bOk)
+{
+    m_lineEditPath->setVisible(bOk);
+    m_labelFilename->setVisible(bOk);
+
+    this->update();
 }
 
 void QtFileDialog::InitWidget()
@@ -96,7 +105,7 @@ void QtFileDialog::InitWidget()
     verLayoutRecent->addWidget(btnHome);
 
     QPushButton *btnRoot = new QPushButton(widgetRecent);
-    btnRoot->setText("root");
+    btnRoot->setText("FAT32");
     btnGroup->addButton(btnRoot, 1);
     verLayoutRecent->addWidget(btnRoot);
 
@@ -112,7 +121,8 @@ void QtFileDialog::InitWidget()
     QHBoxLayout *horLayoutLineEdit = new QHBoxLayout();
     horLayoutLineEdit->setContentsMargins(10, 8, 10, 8);
     horLayoutLineEdit->setSpacing(10);
-    horLayoutLineEdit->addWidget(new QLabel(tr("文件名："), this));
+    m_labelFilename = new QLabel(tr("File name:"), this);
+    horLayoutLineEdit->addWidget(m_labelFilename);
 
     m_lineEditPath = new LineEdit(this);
     m_lineEditPath->setReadOnly(m_bSaveFile);
@@ -125,7 +135,7 @@ void QtFileDialog::InitWidget()
     btnOpen->setStyleSheet(QString("QPushButton {border: 1px solid #5b5b5b; border-radius: 2px; "
                                    "min-width: 80px; min-height: 24px;color: #333333; }"
                                    "QPushButton:pressed {border: 1px solid #0078d7;}"));
-    btnOpen->setText(tr("确  定"));
+    btnOpen->setText(tr("Select"));
     connect(btnOpen, SIGNAL(clicked(bool)), this, SLOT(SltBtnOkClicked()));
     horLayoutLineEdit->addWidget(btnOpen);
 
@@ -193,8 +203,11 @@ void QtFileDialog::SltBtnOkClicked()
             strFile = m_strRootPath + "/" + strFile;
         }
         emit signalSelected(strFile);
-    } else if (!m_bSaveFile) {
-        emit signalBackHome();
+//    } else if (!m_bSaveFile) {
+//        emit signalBackHome();
+//    }
+    } else {
+        emit signalSelected(m_strRootPath);
     }
 }
 
@@ -235,8 +248,8 @@ void QtFileDialog::SltBtnRecentClicked(int index)
         m_listView->setRootIndex(m_model->index("/home/"));
         this->SltItemClicked(m_model->index("/home/"));
     } else if(1 == index){
-        m_listView->setRootIndex(m_model->index("/root/"));
-        this->SltItemClicked(m_model->index("/root/"));
+        m_listView->setRootIndex(m_model->index("/mnt/vfat"));
+        this->SltItemClicked(m_model->index("/mnt/vfat"));
     }
 }
 

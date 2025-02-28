@@ -119,7 +119,7 @@ void MainWindow::InitDesktop()
     // 第一页
     int nPage = 0;
     m_launchItems.insert(3, new LauncherItem(3, nPage, tr("Photos"), QPixmap(":/images/mainwindow/ic_photos.png")));
-    m_launchItems.insert(7, new LauncherItem(7, nPage, tr("Clock"), QPixmap(":/images/mainwindow/ic_clock.png")));
+    m_launchItems.insert(7, new LauncherItem(7, nPage, tr("Calendar"), QPixmap(":/images/mainwindow/ic_clock.png")));
     m_launchItems.insert(8, new LauncherItem(8, nPage, tr("EBook"), QPixmap(":/images/mainwindow/ic_ebook.png")));
     m_launchItems.insert(10, new LauncherItem(10, nPage, tr("Calculator"), QPixmap(":/images/mainwindow/ic_calc.png")));
 

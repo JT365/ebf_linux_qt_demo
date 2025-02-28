@@ -16,6 +16,7 @@
 
 #include "qtwidgetbase.h"
 #include "photolistview.h"
+#include "qtfiledialog.h"
 
 class PhotosView : public QtAnimationWidget
 {
@@ -25,11 +26,17 @@ public:
     PhotosView(QWidget *parent = 0);
     ~PhotosView();
 
+    typedef enum {BtnHome, BtnBack, BtnAdd, BtnSetting} ToolBtn;
+
 private:
     QString m_strDirPath;
 
     PhotoListView *m_photoListView;
     QMap<int, QtPageListWidgetItem*> m_listItems;
+    QtFileDialog            *m_dirDialog;
+    QtPixmapButton          *m_btnAdd;
+    QtPixmapButton          *m_btnBack;
+    QtPixmapButton          *m_btnSetting;
 
 private:
     void InitWidget();
@@ -37,6 +44,12 @@ private:
 private slots:
     void SltLoadPhotos();
     void SltCurrentItemClicked(QtPageListWidgetItem *item);
+    void SltDirSelected(const QString &fileName);
+    void SltDirDialogClose();
+    void SltToolBtnClicked(int index);
+
+protected:
+    void resizeEvent(QResizeEvent *e);
 };
 
 #endif // PHOTOSVIEW_H

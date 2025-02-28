@@ -81,7 +81,7 @@ void ClockBackgroundCfg::drawButton(QPainter *painter)
     painter->drawText(m_btnSure.rect(), Qt::AlignCenter, tr("Finish"));
 
     painter->drawPixmap(m_btnNext.rect(), m_btnNext.pixmap());
-    painter->drawText(m_btnNext.rect(), Qt::AlignCenter, tr("Next step"));
+    painter->drawText(m_btnNext.rect(), Qt::AlignCenter, tr("Next"));
     painter->restore();
 }
 

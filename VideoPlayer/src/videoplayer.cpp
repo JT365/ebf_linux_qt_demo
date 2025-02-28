@@ -10,6 +10,7 @@
 *******************************************************************/
 #include "videoplayer.h"
 #include "skin.h"
+#include "appconfig.h"
 
 #include <QApplication>
 #include <QVBoxLayout>
@@ -24,6 +25,11 @@
 
 VideoPlayer::VideoPlayer(QWidget *parent) : QtAnimationWidget(parent)
 {
+    m_strDirPath = AppConfig::ReadSetting("Video", "location", "/").toString();
+    if (m_strDirPath == "/") {
+        m_strDirPath = qApp->applicationDirPath() + "/video/";
+    }
+
     this->SetBackground(QPixmap(":/images/video/ic_background.png"));
 
     InitWidget();
@@ -32,7 +38,7 @@ VideoPlayer::VideoPlayer(QWidget *parent) : QtAnimationWidget(parent)
 
 VideoPlayer::~VideoPlayer()
 {
-
+    AppConfig::SaveSetting("Video", "location", m_strDirPath);
 }
 
 void VideoPlayer::InitWidget()
@@ -42,7 +48,22 @@ void VideoPlayer::InitWidget()
     m_widgetTitle->SetBackground(Qt::transparent);
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontNormal));
     m_widgetTitle->SetTitle(tr("Video Player"), "#ffffff", 32);
-    connect(m_widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
+    m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/browser/ic_prev_pre.png"), QPixmap(":/images/browser/ic_prev.png"));
+    connect(m_widgetTitle, SIGNAL(signalBtnClicked(int)), this, SLOT(SltToolBtnClicked(int)));
+
+    m_btnBack = new QtPixmapButton(BtnBack, QRect(10, 10, 40, 40), QPixmap(":/images/ebook/ic_back.png"), QPixmap(":/images/ebook/ic_back.png"));
+    m_btnBack->setVisible(false);
+
+    m_btnAdd = new QtPixmapButton(BtnAdd, QRect(746, 0, 54, 54), QPixmap(":/images/video/menu_icon.png"), QPixmap(":/images/video/menu_icon_pressed.png"));
+
+    m_btnSetting = new QtPixmapButton(BtnSetting, QRect(750, 10, 40, 40), QPixmap(":/images/ebook/ic_setting.png"), QPixmap(":/images/ebook/ic_setting_Press.png"));
+    m_btnSetting->setVisible(false);
+
+    QMap<int,QtPixmapButton*> btngroup;
+    btngroup.insert(BtnBack, m_btnBack);
+    btngroup.insert(BtnAdd, m_btnAdd);
+    btngroup.insert(BtnSetting, m_btnSetting);
+    m_widgetTitle->SetToolButtons(btngroup);
 
     QVBoxLayout *verLayoutCentor = new QVBoxLayout(this);
     verLayoutCentor->setContentsMargins(0, 0, 0, 0);
@@ -56,11 +77,18 @@ void VideoPlayer::InitWidget()
 
     m_videoWidget = new QtVideoWidget(this);
     m_videoWidget->hide();
+
+    m_dirDialog = new QtFileDialog(this);
+    m_dirDialog->setRootPath(m_strDirPath);
+    m_dirDialog->setLineditVisible(false);
+    m_dirDialog->setVisible(false);
+    connect(m_dirDialog, SIGNAL(signalBackHome()), this, SLOT(SltDirDialogClose()));
+    connect(m_dirDialog, SIGNAL(signalSelected(QString)), this, SLOT(SltDirSelected(QString)));
 }
 
 void VideoPlayer::LoadMedias()
 {
-    m_videoWidget->m_playList->LoadLocalFiles("/run/media/");
+    m_videoWidget->m_playList->LoadLocalFiles(m_strDirPath);
     QMap<int, QtPageListWidgetItem *> items;
     foreach (QtListWidgetItem *item, m_videoWidget->m_playList->items()) {
         items.insert(item->m_nId, new QtPageListWidgetItem(item->m_nId, item->m_strPath, item->m_strBaseName, QPixmap(":/images/video/ic_video_preview.png")));
@@ -76,11 +104,44 @@ void VideoPlayer::SltItemClicked(QtPageListWidgetItem *item)
     m_videoWidget->show();
 }
 
+void VideoPlayer::SltDirSelected(const QString &fileName)
+{
+    m_strDirPath = fileName;
+    qDebug() << "selected dir is" << fileName;
+
+    SltDirDialogClose();
+
+    // 重新扫描
+    LoadMedias();
+}
+
+void VideoPlayer::SltDirDialogClose()
+{
+    m_dirDialog->StartAnimation(QPoint(0, 0), QPoint(this->width(), -this->height()), 200, false);
+}
+
+void VideoPlayer::SltToolBtnClicked(int index)
+{
+    if (BtnHome == index) {
+        emit signalBackHome();
+    } else if (BtnBack == index) {
+
+    } else if (BtnAdd == index) {
+        m_dirDialog->setSaveFileMode(false);
+        m_dirDialog->StartAnimation(QPoint(this->width(), -this->height()), QPoint(0, 0), 200, true);
+    } else if (BtnSetting == index) {
+
+    }
+}
+
 void VideoPlayer::resizeEvent(QResizeEvent *e)
 {
+    m_dirDialog->resize(this->size());
+    m_scaleX = (this->width() * 1.0) / m_nBaseWidth;
+    m_scaleY = (this->height() * 1.0) / m_nBaseHeight;
+
     if (NULL != m_videoWidget) {
         m_videoWidget->setGeometry(0, 0, this->width(), this->height());
     }
     QWidget::resizeEvent(e);
 }
-

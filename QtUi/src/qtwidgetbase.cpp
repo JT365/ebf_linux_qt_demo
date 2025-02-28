@@ -116,9 +116,9 @@ QtWidgetTitleBar::QtWidgetTitleBar(QWidget *parent) : QtWidgetBase(parent)
     m_colorBackground = "#fafafa";
     m_colorText = "#333333";
 
-    m_btnHome = new QtPixmapButton(0, QRect(746, 0, 54, 54),
-                                   QPixmap(":/images/music/menu_icon.png"),
-                                   QPixmap(":/images/music/menu_icon_pressed.png"));
+    m_btnHome = new QtPixmapButton(0, QRect(10, 10, 40, 40),
+                                   QPixmap(":/images/browser/ic_prev.png"),
+                                   QPixmap(":/images/browser/ic_prev_pre.png"));
     m_btns.insert(m_btnHome->id(), m_btnHome);
     connect(this, SIGNAL(signalBtnClicked(int)), this, SLOT(SltBtnClicked(int)));
 }
@@ -132,9 +132,9 @@ QtWidgetTitleBar::QtWidgetTitleBar(const QString &title, QWidget *parent) :
     m_colorText = "#333333";
     m_nFontSize = 18;
 
-    m_btnHome = new QtPixmapButton(0, QRect(746, 0, 54, 54),
-                                   QPixmap(":/images/music/menu_icon.png"),
-                                   QPixmap(":/images/music/menu_icon_pressed.png"));
+    m_btnHome = new QtPixmapButton(0, QRect(10, 10, 40, 40),
+                                   QPixmap(":/images/browser/ic_prev.png"),
+                                   QPixmap(":/images/browser/ic_prev_pre.png"));
     m_btns.insert(m_btnHome->id(), m_btnHome);
     connect(this, SIGNAL(signalBtnClicked(int)), this, SLOT(SltBtnClicked(int)));
 }
@@ -179,7 +179,7 @@ void QtWidgetTitleBar::SetScalSize(int w, int h)
     m_nBaseWidth = w;
     m_nBaseHeight = h;
 
-    m_btnHome->setRect(QRect(m_nBaseWidth - 10 - 54, (h - 54) / 2, 54, 54));
+    m_btnHome->setRect(QRect(10, (h - 40) / 2, 40, 40));
 
     this->update();
 }

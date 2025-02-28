@@ -58,6 +58,7 @@ public:
     void setSaveFileMode(bool bOk);
     void setRootPath(const QString &path);
     bool isSaveFileMode();
+    void setLineditVisible(bool bOk);
 
 signals:
     void signalSelected(const QString &file);
@@ -70,6 +71,7 @@ private:
     QFileSystemModel    *m_model;
     LineEdit            *m_lineEditPath;
     QLabel              *m_keyboard;
+    QLabel              *m_labelFilename;
 
     QString              m_strRootPath;
     QStringList          m_strListFilter;

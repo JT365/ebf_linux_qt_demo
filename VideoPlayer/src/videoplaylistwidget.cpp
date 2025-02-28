@@ -109,7 +109,7 @@ void MediaPlayListWidget::ScanDirMedias(const QString &path)
         if (fileInfo.isDir()) {
             ScanDirMedias(fileInfo.filePath());
         }
-        else if (fileInfo.suffix() == "mp4") {
+        else if ((fileInfo.suffix() == "mp4") || (fileInfo.suffix() == "avi") || (fileInfo.suffix() == "mov") || (fileInfo.suffix() == "rm") || (fileInfo.suffix() == "mpg") || (fileInfo.suffix() == "flv") || (fileInfo.suffix() == "wmv") ) {
             QString strName = fileInfo.baseName().toLocal8Bit().constData();
             QString strPath = fileInfo.absoluteFilePath().toLocal8Bit().constData();
             m_playList->addMedia(QUrl::fromLocalFile(strPath));

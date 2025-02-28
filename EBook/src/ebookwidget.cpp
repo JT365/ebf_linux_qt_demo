@@ -89,7 +89,6 @@ void EBookWidget::InitWidget()
     m_widgetTitle= new QtWidgetTitleBar(this);
     m_widgetTitle->SetScalSize(Skin::m_nScreenWidth, 60);
     m_widgetTitle->SetBackground(QColor("#f0f0f0"));
-    m_widgetTitle->SetBtnHomePixmap(QPixmap(":/images/ebook/menu_icon.png"), QPixmap(":/images/ebook/menu_icon_pressed.png"));
     m_widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
     m_widgetTitle->SetTitle(tr("EBook"), "#333333", 22);
     connect(m_widgetTitle, SIGNAL(signalBtnClicked(int)), this, SLOT(SltToolBtnClicked(int)));
@@ -97,7 +96,8 @@ void EBookWidget::InitWidget()
     m_btnBack = new QtPixmapButton(BtnBack, QRect(10, 10, 40, 40), QPixmap(":/images/ebook/ic_back.png"), QPixmap(":/images/ebook/ic_back.png"));
     m_btnBack->setVisible(false);
 
-    m_btnAdd = new QtPixmapButton(BtnAdd, QRect(10, 10, 40, 40), QPixmap(":/images/ebook/ic_add.png"), QPixmap(":/images/ebook/ic_add_pressed.png"));
+    m_btnAdd = new QtPixmapButton(BtnAdd, QRect(746, 0, 54, 54), QPixmap(":/images/ebook/menu_icon.png"), QPixmap(":/images/ebook/menu_icon_pressed.png"));
+
     m_btnSetting = new QtPixmapButton(BtnSetting, QRect(750, 10, 40, 40), QPixmap(":/images/ebook/ic_setting.png"), QPixmap(":/images/ebook/ic_setting_Press.png"));
     m_btnSetting->setVisible(false);
 
@@ -230,7 +230,7 @@ void EBookWidget::SltFileSelected(const QString &fileName)
 
 void EBookWidget::SltFileDialogClose()
 {
-    m_fileDialog->StartAnimation(QPoint(0, 0), QPoint(0, -this->height()), 200, false);
+    m_fileDialog->StartAnimation(QPoint(0, 0), QPoint(this->width(), -this->height()), 200, false);
 }
 
 void EBookWidget::SltToolBtnClicked(int index)
@@ -245,7 +245,7 @@ void EBookWidget::SltToolBtnClicked(int index)
         }
     } else if (BtnAdd == index) {
         m_fileDialog->setSaveFileMode(false);
-        m_fileDialog->StartAnimation(QPoint(0, this->height()), QPoint(0, 0), 200, true);
+        m_fileDialog->StartAnimation(QPoint(QPoint(this->width(), -this->height())), QPoint(0, 0), 200, true);
     } else if (BtnSetting == index) {
         if (m_paletteWidget->pos().x() > (this->width() / 2)) {
             m_paletteWidget->StartAnimation(QPoint(this->width(), 58 * m_scaleY), QPoint(this->width() - m_paletteWidget->width(), 58 * m_scaleY), 200, true);

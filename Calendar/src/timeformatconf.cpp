@@ -34,9 +34,9 @@ TimeFormatConf::TimeFormatConf(QWidget *parent) : QtWidgetBase(parent)
     m_btns.insert(0, new QtPixmapButton(0, QRect(68, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
     m_btns.insert(1, new QtPixmapButton(1, QRect(317, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
     m_btns.insert(2, new QtPixmapButton(2, QRect(565, 308, 166, 70), QPixmap(":/images/calendar/ic_btn.png"), QPixmap(":/images/calendar/ic_btn_pre.png")));
-    m_btns.value(0)->setText(tr("Prev. step"));
+    m_btns.value(0)->setText(tr("Prev."));
     m_btns.value(1)->setText(tr("Ok"));
-    m_btns.value(2)->setText(tr("Next step"));
+    m_btns.value(2)->setText(tr("Next"));
 
     connect(this, SIGNAL(signalBtnClicked(int)), this, SLOT(SltBtnClicked(int)));
 }

@@ -39,7 +39,7 @@ void BackLightWidget::InitWidget()
     widgetTitle->SetBackground(Qt::transparent);
     widgetTitle->setFont(QFont(Skin::m_strAppFontBold));
     widgetTitle->SetTitle(tr("Brightness Adjustment"), "#ffffff", 24);
-    widgetTitle->SetBtnHomePixmap(QPixmap(":/images/backlight/menu_icon.png"), QPixmap(":/images/backlight/menu_icon_pressed.png"));
+    widgetTitle->SetBtnHomePixmap(QPixmap(":/images/browser/ic_prev_pre.png"), QPixmap(":/images/browser/ic_prev.png"));
     connect(widgetTitle, SIGNAL(signalBackHome()), this, SIGNAL(signalBackHome()));
 
     m_knobSwitch = new QtKnobSwitch(this);
