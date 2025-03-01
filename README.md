@@ -9,7 +9,7 @@
 5. App is the executable program of this demo, that is, the program runs on ARM board.
 6. Annotated .pro projects are independent applications, which can be uncommented and compiled separately.
 
-## Install SDK
+## Install SDK for ARM
 
 **Download SDK**
 

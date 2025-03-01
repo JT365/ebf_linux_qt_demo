@@ -18,6 +18,10 @@
         <file>images/mainwindow/ic_file.png</file>
         <file>images/mainwindow/about_logo.png</file>
         <file>images/mainwindow/ic_weather.png</file>
+        <file>images/mainwindow/panelink.png</file>
+        <file>images/mainwindow/opendeck.png</file>
+        <file>images/mainwindow/flipclock.png</file>
+        <file>images/mainwindow/pp.png</file>
         <file>images/music/background.png</file>
         <file>images/music/ic_equalizer.png</file>
         <file>images/music/ic_list.png</file>
@@ -79,6 +83,10 @@
         <file>images/ebook/ic_setting_Press.png</file>
         <file>images/ebook/menu_icon.png</file>
         <file>images/ebook/menu_icon_pressed.png</file>
+        <file>images/flipclock/ic_back.png</file>
+        <file>images/flipclock/ic_back_pre.png</file>
+        <file>images/flipclock/ic_setting.png</file>
+        <file>images/flipclock/ic_setting_Press.png</file>
         <file>images/photos/ic_background.png</file>
         <file>images/photos/menu_icon.png</file>
         <file>images/photos/menu_icon_pressed.png</file>
