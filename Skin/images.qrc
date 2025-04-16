@@ -75,7 +75,6 @@
         <file>images/calendar/settings_calendar.png</file>
         <file>images/video/ic_background.png</file>
         <file>images/mainwindow/ic_advert.png</file>
-
         <file>images/ebook/ic_add.png</file>
         <file>images/ebook/ic_add_pressed.png</file>
         <file>images/ebook/ic_back.png</file>
@@ -87,6 +86,12 @@
         <file>images/flipclock/ic_back_pre.png</file>
         <file>images/flipclock/ic_setting.png</file>
         <file>images/flipclock/ic_setting_Press.png</file>
+        <file>images/fingerpaint/413-54.png</file>
+        <file>images/fingerpaint/8f-54.png</file>
+        <file>images/fingerpaint/ic_back.png</file>
+        <file>images/fingerpaint/ic_back_pre.png</file>
+        <file>images/fingerpaint/menu_icon.png</file>
+        <file>images/fingerpaint/menu_icon_pressed.png</file>
         <file>images/photos/ic_background.png</file>
         <file>images/photos/menu_icon.png</file>
         <file>images/photos/menu_icon_pressed.png</file>
@@ -106,7 +111,6 @@
         <file>images/photos/toolbar/play_pressed.png</file>
         <file>images/photos/toolbar/right_rotate.png</file>
         <file>images/photos/toolbar/right_rotate_pressed.png</file>
-
         <file>images/mainwindow/ic_car.png</file>
         <file>images/mainwindow/statusbar_bg.png</file>
         <file>images/browser/ic_home.png</file>
@@ -164,5 +168,7 @@
         <file>images/infones/menu_icon.png</file>
         <file>images/infones/menu_icon_pressed.png</file>
         <file>images/mainwindow/ic_key.png</file>
+        <file>images/fingerpaint/413-38.png</file>
+        <file>images/fingerpaint/8f-38.png</file>
     </qresource>
 </RCC>

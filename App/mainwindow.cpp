@@ -24,6 +24,7 @@
 //#include "recorderwidget.h"
 #include "settingwidget.h"
 #include "videoplayer.h"
+#include "fingerpaint.h"
 #include "infoneswidget.h"
 
 #include "qtmessage.h"
@@ -140,7 +141,7 @@ void MainWindow::InitDesktop()
     // 第三页
     nPage++;
     m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES Simulator"), QPixmap(":/images/mainwindow/ic_game.png")));
-
+    m_launchItems.insert(25, new LauncherItem(25, nPage, tr("FingerPaint"), QPixmap(":/images/mainwindow/ic_key.png")));
     m_launcherWidget->SetItems(m_launchItems);
 #endif
 }
@@ -262,6 +263,11 @@ void MainWindow::SltCurrentAppChanged(int index)
         #endif
         }
     }
+        break;
+    case 25: {
+
+        m_widgetWorkSpace = new FingerPaint(this);
+}
         break;
 
     default:

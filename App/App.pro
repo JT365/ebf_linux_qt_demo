@@ -49,6 +49,7 @@ include($$PWD/../Photos/photos.pri)
 #include($$PWD/../Recorder/recorder.pri)
 include($$PWD/../Settings/settings.pri)
 include($$PWD/../VideoPlayer/videoplayer.pri)
+include($$PWD/../FingerPaint/fingerpaint.pri)
 #
 include($$PWD/../InfoNes/infones.pri)
 #include($$PWD/../NesSimulator/simulator.pri)
