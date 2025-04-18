@@ -25,6 +25,7 @@
 #include "settingwidget.h"
 #include "videoplayer.h"
 #include "fingerpaint.h"
+#include "fish.h"
 #include "infoneswidget.h"
 
 #include "qtmessage.h"
@@ -142,6 +143,7 @@ void MainWindow::InitDesktop()
     nPage++;
     m_launchItems.insert(24, new LauncherItem(24, nPage, tr("InfoNES Simulator"), QPixmap(":/images/mainwindow/ic_game.png")));
     m_launchItems.insert(25, new LauncherItem(25, nPage, tr("FingerPaint"), QPixmap(":/images/mainwindow/ic_key.png")));
+    m_launchItems.insert(26, new LauncherItem(26, nPage, tr("Fish"), QPixmap(":/images/mainwindow/fish-80.png")));
     m_launcherWidget->SetItems(m_launchItems);
 #endif
 }
@@ -269,7 +271,11 @@ void MainWindow::SltCurrentAppChanged(int index)
         m_widgetWorkSpace = new FingerPaint(this);
 }
         break;
-
+    case 26: {
+    
+        m_widgetWorkSpace = new Fish(this);
+}
+        break;
     default:
         m_nCurrentIndex = -1;
         break;

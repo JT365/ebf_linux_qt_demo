@@ -170,5 +170,11 @@
         <file>images/mainwindow/ic_key.png</file>
         <file>images/fingerpaint/413-38.png</file>
         <file>images/fingerpaint/8f-38.png</file>
+        <file>images/mainwindow/fish-80.png</file>
+        <file>images/fish/ic_back.png</file>
+        <file>images/fish/ic_back_pre.png</file>
+        <file>images/fish/menu_icon.png</file>
+        <file>images/fish/menu_icon_pressed.png</file>
+        <file>images/fish/poolb.png</file>
     </qresource>
 </RCC>
