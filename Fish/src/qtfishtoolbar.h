@@ -31,10 +31,13 @@ public slots:
 
 signals:
     void signalBack();
+    void signalMenu();
 
 private:
     QString m_strText;
     QRect   m_rectBack;
+    QRect   m_rectMenu;
+
 protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *e);

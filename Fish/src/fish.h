@@ -48,10 +48,14 @@ private:
 private:
     void InitWidget();
     void ShowToolBar();
+    void LoadBackground();
 
 private slots:
     void SltAutoCloseToolBar();
     void SltBackClicked();
+    void SltMenuClicked();
+    void SltFileSelected(const QString &fileName);
+    void SltFileDialogClose();
 
 protected:
     void resizeEvent(QResizeEvent *e);

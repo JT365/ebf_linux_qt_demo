@@ -23,6 +23,7 @@ FishTitleBarWidget::FishTitleBarWidget(QWidget *parent) : QtToolBar(parent)
     m_nBaseHeight = 50;
 
     m_rectBack = QRect(20, 10, 40, 40);
+    m_rectMenu = QRect(750, 2, 54, 54);
 }
 
 FishTitleBarWidget::~FishTitleBarWidget()
@@ -43,7 +44,8 @@ void FishTitleBarWidget::paintEvent(QPaintEvent *)
     painter.scale(m_scaleX, m_scaleY);
     painter.fillRect(0, 0, m_nBaseWidth, m_nBaseHeight, QColor("#7f182E3A"));
 
-    painter.drawPixmap(m_rectBack.topLeft(), QPixmap(":/images/photos/toolbar/ic_back.png"));
+    painter.drawPixmap(m_rectBack.topLeft(), QPixmap(":/images/fish/ic_back.png"));
+    painter.drawPixmap(m_rectMenu.topLeft(), QPixmap(":/images/fish/menu_icon.png"));
 
     painter.setPen("#ffffff");
     painter.setFont(QFont(Skin::m_strAppFontNormal, 18));
@@ -57,6 +59,12 @@ void FishTitleBarWidget::mousePressEvent(QMouseEvent *e)
     if (rect.contains(e->pos())) {
         emit signalBack();
     }
+
+    ScaleRect(rect, m_rectMenu);
+    if (rect.contains(e->pos())) {
+        emit signalMenu();
+    }
+
     QWidget::mousePressEvent(e);
 }
 

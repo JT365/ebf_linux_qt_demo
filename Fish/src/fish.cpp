@@ -28,12 +28,14 @@ Fish::Fish(QWidget *parent) : QtAnimationWidget(parent)
     grabGesture(Qt::TapAndHoldGesture);
 
     m_strDirPath = AppConfig::ReadSetting("Fish", "location", "/").toString();
-    if (m_strDirPath == "/") {
-        m_strDirPath = qApp->applicationDirPath() + "/fish/";
-    }
+    LoadBackground();
 
-    this->SetBackground(QPixmap(":/images/fish/poolb.png"));
     InitWidget();
+
+    m_dirDialog = new QtFileDialog(this);
+    m_dirDialog->setVisible(false);
+    connect(m_dirDialog, SIGNAL(signalBackHome()), this, SLOT(SltFileDialogClose()));
+    connect(m_dirDialog, SIGNAL(signalSelected(QString)), this, SLOT(SltFileSelected(QString)));
 }
 
 Fish::~Fish()
@@ -53,6 +55,7 @@ void Fish::InitWidget()
     m_titleBar = new FishTitleBarWidget(this);
     m_titleBar->SetText("Fish");
     connect(m_titleBar, SIGNAL(signalBack()), this, SLOT(SltBackClicked()));
+    connect(m_titleBar, SIGNAL(signalMenu()), this, SLOT(SltMenuClicked()));
 
     m_timerShow = new QTimer(this);
     m_timerShow->setSingleShot(true);
@@ -86,15 +89,56 @@ void Fish::SltBackClicked()
     emit signalBackHome();
 }
 
+void Fish::SltMenuClicked()
+{
+    QFileInfo fi;
+
+    fi = QFileInfo(m_strDirPath);
+    m_dirDialog->setSaveFileMode(false);
+    m_dirDialog->setRootPath(fi.absolutePath());
+    m_dirDialog->StartAnimation(QPoint(this->width(), -this->height()), QPoint(0, 0), 200, true);
+}
+
+void Fish::SltFileSelected(const QString &fileName)
+{
+    m_strDirPath = fileName;
+
+    // 重新扫描
+    LoadBackground();
+    SltFileDialogClose();
+}
+
+void Fish::SltFileDialogClose()
+{
+    m_dirDialog->StartAnimation(QPoint(0, 0), QPoint(this->width(), -this->height()), 200, false);
+}
+
+
+void Fish::LoadBackground()
+{
+    QPixmap *map;
+
+    qDebug() << "load background pic" << m_strDirPath;
+    QFileInfo fileInfo(m_strDirPath);
+    if(fileInfo.isFile())
+    {
+        map = new QPixmap(m_strDirPath);
+    }
+    else {
+        map = new QPixmap(":/images/fish/poolb.png");
+    }
+
+    this->SetBackground(*map);
+}
+
 void Fish::resizeEvent(QResizeEvent *e)
 {
     SetScaleValue();
-    m_scaleX = (this->width() * 1.0) / m_nBaseWidth;
-    m_scaleY = (this->height() * 1.0) / m_nBaseHeight;
 
     m_titleBar->resize(this->width(), 50 * m_scaleY);
     m_titleBar->move(0, -m_titleBar->height());
 
+    m_dirDialog->resize(this->size());
     setGeometry(0, 0, this->width(), this->height());
 
     QWidget::resizeEvent(e);
