@@ -49,7 +49,6 @@ void FingerPaint::InitWidget()
     m_btnBack->setVisible(false);
 
     m_btnClear = new QtPixmapButton(BtnClear, QRect(746, 10, 38, 38), QPixmap(":/images/fingerpaint/413-38.png"), QPixmap(":/images/fingerpaint/8f-38.png"));
-//    m_btnClear->setVisible(false);
 
     QMap<int,QtPixmapButton*> btngroup;
     btngroup.insert(BtnBack, m_btnBack);
@@ -57,9 +56,6 @@ void FingerPaint::InitWidget()
     widgetTitle->SetToolButtons(btngroup);
 
     m_scribble = new ScribbleArea(this);
-//    m_scribble->SetBackground(QColor("#ffffff"));
-//    connect(m_scribble, SIGNAL(currentItemClicked(QtPageListWidgetItem*)), this, SLOT(SltCurrentItemClicked(QtPageListWidgetItem*)));
-
     QVBoxLayout *verLayout = new QVBoxLayout(this);
     verLayout->setContentsMargins(0, 0, 0, 0);
     verLayout->setSpacing(0);
@@ -75,19 +71,14 @@ void FingerPaint::SltToolBtnClicked(int index)
     } else if (BtnBack == index) {
 
     } else if (BtnClear == index) {
-//        m_dirDialog->setSaveFileMode(false);
         m_scribble->clearImage();
-//        m_dirDialog->StartAnimation(QPoint(this->width(), -this->height()), QPoint(0, 0), 200, true);
-    } else if (BtnSetting == index) {
 
     }
 }
 
 void FingerPaint::resizeEvent(QResizeEvent *e)
 {
-//    m_dirDialog->resize(this->size());
-    m_scaleX = (this->width() * 1.0) / m_nBaseWidth;
-    m_scaleY = (this->height() * 1.0) / m_nBaseHeight;
+    SetScaleValue();
 
     QWidget::resizeEvent(e);
 }
